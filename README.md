@@ -12,9 +12,9 @@ Sistema web de gestión para panadería y repostería, diseñado para administra
 ## Módulos del sistema
 
 * **Usuarios:** administración de perfiles y contraseñas
-* **Inventario:** control de materias primas, entradas y alertas de stock mínimo
+* **Inventario:** control de materias primas, proveedores entradas y alertas de stock mínimo
 * **Recetas:** consulta y gestión de recetas
 * **Producción:** control de órdenes de producción
 * **Ventas:** gestión de caja e historial de ventas
 * **Reportes:** reportes de estado y alertas preventivas
-* **Configuración:** parámetros generales e impuestos
+* **Configuración:** parámetros generales del sistema
