@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pan en su punto - Venta exitosa</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/style.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+
+<body>
+    <nav class="menu-lateral">
+        <button id="btn-cerrar-menu" class="btn-cerrar-menu">
+            <i class="fa-solid fa-xmark"></i>
+        </button>
+        <div class="logo-contenedor">
+            <img src="img/logo.jpg" alt="Logo Pan en su punto">
+        </div>
+        <ul>
+            <li><a href="panel.html"><i class="fa-solid fa-house"></i> Inicio</a></li>
+            <li><a href="usuarios.html"><i class="fa-solid fa-users"></i> Usuarios</a></li>
+            <li><a href="inventario-inicio.html"><i class="fa-solid fa-box"></i> Inventario</a></li>
+            <li><a href="recetas-inicio.html"><i class="fa-solid fa-book"></i> Recetas</a></li>
+            <li><a href="produccion-inicio.html"><i class="fa-solid fa-fire-burner"></i> Producción</a></li>
+            <li><a href="ventas-inicio.html" class="activo"><i class="fa-solid fa-cash-register"></i> Ventas</a></li>
+            <li><a href="reportes-inicio.html"><i class="fa-solid fa-chart-line"></i> Reportes</a></li>
+            <li><a href="configuracion.html"><i class="fa-solid fa-gear"></i> Configuración</a></li>
+        </ul>
+    </nav>
+    <main class="contenido-principal">
+        <header class="barra-superior">
+            <div class="buscador">
+                <i class="fa-solid fa-magnifying-glass"></i>
+                <input type="text" placeholder="Buscar...">
+            </div>
+            <div class="iconos-usuario">
+                <i class="fa-regular fa-bell"></i>
+                <div class="avatar-usuario">A</div>
+            </div>
+        </header>
+        <div class="contenedor-venta-exitosa">
+            <!-- Cabecera superior con botones de acción -->
+            <div class="cabecera-exitosa">
+                <div class="info-transaccion">
+                    <h2>Venta exitosa</h2>
+                    <p><i class="fa-solid fa-receipt"></i> Transacción #trx-9824 — 28 de oct, 2026, 08:42 am</p>
+                </div>
+                <div class="acciones-transaccion">
+                    <button type="button" class="btn-secundario boton-whatsapp" id="btn-abrir-modal-whatsapp"><i
+                            class="fa-brands fa-whatsapp"></i> Enviar por WhatsApp</button>
+                    <a href="nueva-venta.html" class="btn-principal boton-nueva-venta"><i class="fa-solid fa-plus"></i>
+                        Nueva venta</a>
+                </div>
+            </div>
+
+            <!-- Cuerpo dividido: Tirilla y Facturación Electrónica -->
+            <div class="layout-recibo">
+
+                <!-- Columna Izquierda: Tirilla de caja -->
+                <div class="tirilla-pago">
+                    <div class="encabezado-tirilla">
+                        <img src="img/logo.jpg" alt="Logo Pan en su punto" class="logo-tirilla">
+                        <p>NIT 900.123.456-7</p>
+                        <p>Calle 123 #45-67, Armenia</p>
+                        <p>Tel +57 (601) 867 - 5309</p>
+                    </div>
+
+                    <div class="datos-cliente-cajero">
+                        <div class="dato-col">
+                            <span class="etiqueta-tirilla">Cliente</span>
+                            <span class="valor-tirilla">Mostrador</span>
+                        </div>
+                        <div class="dato-col">
+                            <span class="etiqueta-tirilla">Cajero</span>
+                            <span class="valor-tirilla">Javier Morales</span>
+                        </div>
+                    </div>
+
+                    <table class="tabla-tirilla">
+                        <thead>
+                            <tr>
+                                <th>Artículo</th>
+                                <th class="texto-centro">Cant</th>
+                                <th class="texto-derecha">Precio</th>
+                                <th class="texto-derecha">Total</th>
+                            </tr>
+                        </thead>
+                        <tbody id="cuerpo-tabla-tirilla">
+                            <!-- JavaScript insertará aquí los productos reales -->
+                        </tbody>
+                    </table>
+
+                    <div class="totales-tirilla">
+                        <!-- Fila de descuento en tirilla -->
+                        <div class="linea-total fila-descuento-tirilla oculto" id="tirilla-fila-descuento">
+                            <span>Descuento aplicado</span>
+                            <span id="tirilla-descuento">-$0</span>
+                        </div>
+                        <div class="linea-total" id="tirilla-fila-descuento" style="display: none; color: #16A34A;">
+                            <span>Descuento aplicado</span>
+                            <span id="tirilla-descuento">$0</span>
+                        </div>
+                        <div class="linea-total-tirilla">
+                            <span>Impuestos (8%)</span>
+                            <span id="tirilla-impuestos">$0</span>
+                        </div>
+                        <div class="linea-total-tirilla gran-total">
+                            <span>Total</span>
+                            <span class="resaltado-total-tirilla" id="tirilla-total">$0 COP</span>
+                        </div>
+                    </div>
+                    <div class="pie-tirilla">
+                        <p class="mensaje-gracias">¡Gracias por su compra!</p>
+                        <p class="legales-tirilla">Las devoluciones se aceptan solo en las primeras 2 horas con recibo
+                            original para artículos empacados (Ley 1480 de 2011).</p>
+                    </div>
+                </div>
+
+                <!-- Columna Derecha: Facturación electrónica -->
+                <div class="panel-fe">
+                    <div class="titulo-fe">
+                        <i class="fa-solid fa-file-invoice"></i>
+                        <span>Facturación electrónica</span>
+                    </div>
+                    <div class="codigo-qr">
+                        <img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=FacturaElectronicaPanEnSuPunto"
+                            alt="QR Factura Electrónica">
+                    </div>
+                    <p class="instruccion-qr">Escanee para descargar su factura electrónica</p>
+                    <div class="caja-cufe">
+                        <span class="etiqueta-cufe">CUFE</span>
+                        <span class="valor-cufe">8A98-4C2D-E1F0-55B2</span>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <!-- Modal para enviar comprobante por correo -->
+        <!-- Modal para enviar comprobante por WhatsApp -->
+        <div id="modal-enviar-whatsapp" class="modal oculto">
+            <div class="modal-whatsapp-contenedor">
+                <div class="icono-modal-whatsapp">
+                    <i class="fa-brands fa-whatsapp"></i>
+                </div>
+                <h3>Enviar comprobante por WhatsApp</h3>
+                <p class="descripcion-modal-whatsapp">Ingresa el número de celular del cliente (10 dígitos) para
+                    enviarle la tirilla y los datos de facturación.</p>
+
+                <form id="form-enviar-whatsapp" class="formulario-modal-whatsapp" onsubmit="return false;">
+                    <div class="grupo-campo-modal">
+                        <label for="input-telefono-cliente">Número de celular</label>
+                        <div class="caja-input-telefono">
+                            <span class="prefijo-pais">+57</span>
+                            <input type="tel" id="input-telefono-cliente" placeholder="3001234567" maxlength="10"
+                                required>
+                        </div>
+                    </div>
+
+                    <div class="acciones-modal-whatsapp">
+                        <button type="button" class="btn-secundario" id="btn-cancelar-envio-whatsapp">Cancelar</button>
+                        <button type="button" class="btn-whatsapp" id="btn-confirmar-envio-whatsapp">Enviar a WhatsApp
+                            <i class="fa-solid fa-arrow-up-right-from-square"></i></button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </main>
+    </div>
+    <script src="js/main.js"></script>
+</body>
+
+</html>

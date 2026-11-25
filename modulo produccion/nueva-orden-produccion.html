@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pan en su punto - Gestión de producción</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/style.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+
+<body>
+    <nav class="menu-lateral">
+        <button id="btn-cerrar-menu" class="btn-cerrar-menu">
+            <i class="fa-solid fa-xmark"></i>
+        </button>
+        <div class="logo-contenedor">
+            <img src="img/logo.jpg" alt="Logo Pan en su punto">
+        </div>
+        <ul>
+            <li><a href="panel.html"><i class="fa-solid fa-house"></i> Inicio</a></li>
+            <li><a href="usuarios.html"><i class="fa-solid fa-users"></i> Usuarios</a></li>
+            <li><a href="inventario-inicio.html"><i class="fa-solid fa-box"></i> Inventario</a></li>
+            <li><a href="recetas-inicio.html"><i class="fa-solid fa-book"></i> Recetas</a></li>
+            <li><a href="produccion-inicio.html" class="activo"><i class="fa-solid fa-fire-burner"></i> Producción</a></li>
+            <li><a href="ventas-inicio.html"><i class="fa-solid fa-cash-register"></i> Ventas</a></li>
+            <li><a href="reportes-inicio.html"><i class="fa-solid fa-chart-line"></i> Reportes</a></li>
+            <li><a href="configuracion.html"><i class="fa-solid fa-gear"></i> Configuración</a></li>
+        </ul>
+    </nav>
+    <main class="contenido-principal">
+        <header class="barra-superior">
+            <div class="buscador">
+                <i class="fa-solid fa-magnifying-glass"></i>
+                <input type="text" placeholder="Buscar...">
+            </div>
+            <div class="iconos-usuario">
+                <i class="fa-regular fa-bell"></i>
+                <div class="avatar-usuario">A</div>
+            </div>
+        </header>
+        <div class="encabezado-seccion">
+            <div>
+                <h2>Nueva orden de producción</h2>
+                <p>Planifica un nuevo lote de horneado y calcula los insumos requeridos.</p>
+            </div>
+            <a href="ordenes-produccion.html" class="btn-principal"><i class="fa-solid fa-arrow-left"></i> Volver a
+                órdenes</a>
+        </div>
+
+        <div class="tarjeta-formulario">
+            <form id="form-nueva-orden">
+                <h3>Datos de planificación</h3>
+                <div class="formulario-cuadricula">
+                    <div class="grupo-input">
+                        <label for="nueva-fecha-orden">Fecha programada <span class="requerido">*</span></label>
+                        <input type="date" id="nueva-fecha-orden" required>
+                    </div>
+
+                    <div class="grupo-input">
+                        <label for="nuevo-producto-orden">Producto a elaborar <span class="requerido">*</span></label>
+                        <select id="nuevo-producto-orden" required>
+                            <option value="" disabled selected>Selecciona un producto...</option>
+                            <option value="pan-artesanal">Pan artesanal (Fórmula R-001)</option>
+                            <option value="baguette">Baguette rústica (Fórmula R-004)</option>
+                            <option value="croissant">Croissant de mantequilla (Fórmula R-014)</option>
+                        </select>
+                    </div>
+
+                    <div class="grupo-input">
+                        <label for="nueva-cantidad-orden">Cantidad planificada (unidades) <span
+                                class="requerido">*</span></label>
+                        <input type="number" id="nueva-cantidad-orden" placeholder="Ej: 50" min="1" required>
+                    </div>
+
+                    <div class="grupo-input">
+                        <label for="nuevo-responsable-orden">Panadero responsable <span
+                                class="requerido">*</span></label>
+                        <select id="nuevo-responsable-orden" required>
+                            <option value="" disabled selected>Selecciona un panadero...</option>
+                            <option value="carlos">Carlos Pérez</option>
+                            <option value="maria">María Gómez</option>
+                        </select>
+                    </div>
+
+                    <div class="grupo-input">
+                        <label for="nuevo-estado-orden">Estado inicial</label>
+                        <input type="text" id="nuevo-estado-orden" value="Pendiente" readonly class="input-bloqueado">
+                    </div>
+                </div>
+
+                <h3>Cálculo de insumos</h3>
+                <div class="contenedor-tabla-formulario">
+                    <div class="alerta-info">
+                        <i class="fa-solid fa-circle-info"></i> Al seleccionar el producto y la cantidad, el sistema
+                        calculará automáticamente los insumos requeridos según la fórmula estandarizada.
+                    </div>
+                    <table class="tabla-datos">
+                        <thead>
+                            <tr>
+                                <th>Materia prima</th>
+                                <th>Cantidad total requerida</th>
+                                <th>Disponibilidad en inventario</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tabla-insumos-dinamica">
+                            <tr>
+                                <td colspan="3" class="fila-vacia-mensaje">Selecciona un producto y cantidad para
+                                    visualizar los insumos.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="grupo-input ancho-completo">
+                    <label for="nuevas-notas-orden">Instrucciones o notas adicionales</label>
+                    <textarea id="nuevas-notas-orden" rows="3"
+                        placeholder="Anotaciones especiales para el horneado de este lote..."></textarea>
+                </div>
+
+                <div class="acciones-formulario">
+                    <a href="ordenes-produccion.html" class="btn-secundario">Cancelar</a>
+                    <button type="button" id="btn-crear-orden" class="btn-principal">Crear orden de producción</button>
+                </div>
+            </form>
+        </div>
+
+        <!-- Modal de Confirmación de Creación -->
+        <div id="modal-exito-nueva-orden" class="fondo-modal oculto">
+            <div class="contenido-modal centrado">
+                <div class="icono-exito">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <polyline points="20 6 9 17 4 12"></polyline>
+                    </svg>
+                </div>
+                <h3>¡Orden creada con éxito!</h3>
+                <p>La orden se ha guardado en estado Pendiente. Los insumos se descontarán al iniciar el proceso.</p>
+                <a href="ordenes-produccion.html" class="btn-principal boton-ancho">Ir al panel de órdenes</a>
+            </div>
+        </div>
+    </main>
+    <script src="js/main.js"></script>
+</body>
+
+</html>

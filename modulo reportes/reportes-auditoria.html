@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pan en su punto - Gestión de reportes</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/style.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+
+<body>
+    <nav class="menu-lateral">
+        <button id="btn-cerrar-menu" class="btn-cerrar-menu">
+            <i class="fa-solid fa-xmark"></i>
+        </button>
+        <div class="logo-contenedor">
+            <img src="img/logo.jpg" alt="Logo Pan en su punto">
+        </div>
+        <ul>
+            <li><a href="panel.html"><i class="fa-solid fa-house"></i> Inicio</a></li>
+            <li><a href="usuarios.html"><i class="fa-solid fa-users"></i> Usuarios</a></li>
+            <li><a href="inventario-inicio.html"><i class="fa-solid fa-box"></i> Inventario</a></li>
+            <li><a href="recetas-inicio.html"><i class="fa-solid fa-book"></i> Recetas</a></li>
+            <li><a href="produccion-inicio.html"><i class="fa-solid fa-fire-burner"></i> Producción</a></li>
+            <li><a href="ventas-inicio.html"><i class="fa-solid fa-cash-register"></i> Ventas</a></li>
+            <li><a href="reportes-inicio.html" class="activo"><i class="fa-solid fa-chart-line"></i> Reportes</a></li>
+            <li><a href="configuracion.html"><i class="fa-solid fa-gear"></i> Configuración</a></li>
+        </ul>
+    </nav>
+    <main class="contenido-principal">
+        <header class="barra-superior">
+            <div class="buscador">
+                <i class="fa-solid fa-magnifying-glass"></i>
+                <input type="text" placeholder="Buscar...">
+            </div>
+            <div class="iconos-usuario">
+                <i class="fa-regular fa-bell"></i>
+                <div class="avatar-usuario">A</div>
+            </div>
+        </header>
+        <!-- Contenido: Reporte de Auditoría de Reportes -->
+        <div class="contenedor-reportes-detalle">
+
+            <!-- Cabecera simétrica de ancho completo -->
+            <div class="cabecera-reportes-detalle">
+                <div class="titulos-configuracion">
+                    <h2>Auditoría de reportes</h2>
+                    <p>Registro histórico y trazabilidad de consultas y exportaciones de documentos generados en el
+                        sistema.</p>
+                </div>
+                <div class="acciones-configuracion">
+                    <a href="reportes-inicio.html" class="btn-volver-derecha">
+                        <i class="fa-solid fa-arrow-left"></i> Volver al panel
+                    </a>
+                </div>
+            </div>
+
+            <!-- Panel de Filtros -->
+            <div class="tarjeta-filtros-reporte">
+                <form id="form-generar-reporte-auditoria">
+                    <div class="rejilla-filtros">
+                        <div class="grupo-filtro">
+                            <label for="filtro-fecha-inicio-audit">Fecha inicial</label>
+                            <input type="date" id="filtro-fecha-inicio-audit" class="input-texto-modal" required>
+                        </div>
+                        <div class="grupo-filtro">
+                            <label for="filtro-fecha-fin-audit">Fecha final</label>
+                            <input type="date" id="filtro-fecha-fin-audit" class="input-texto-modal" required>
+                        </div>
+                        <div class="grupo-filtro">
+                            <label for="filtro-usuario-audit">Usuario</label>
+                            <select id="filtro-usuario-audit" class="select-modal">
+                                <option value="todos">Todos los usuarios</option>
+                                <option value="admin">Administrador (Admin)</option>
+                                <option value="carlos">Carlos Mendoza (Cajero)</option>
+                                <option value="ana">Ana Torres (Cajero)</option>
+                                <option value="panadero">Panadero principal</option>
+                            </select>
+                        </div>
+                        <div class="grupo-filtro">
+                            <label for="filtro-accion-audit">Tipo de acción</label>
+                            <select id="filtro-accion-audit" class="select-modal">
+                                <option value="todas">Todas las acciones</option>
+                                <option value="consulta">Visualización en pantalla</option>
+                                <option value="pdf">Exportación a PDF</option>
+                                <option value="excel">Exportación a Excel</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="acciones-filtros">
+                        <button type="submit" class="btn-principal">
+                            <i class="fa-solid fa-magnifying-glass"></i> Consultar registros
+                        </button>
+                    </div>
+                </form>
+            </div>
+
+            <!-- Resultados del Reporte (Ocultos por defecto) -->
+            <div id="resultados-reporte-auditoria" class="oculto">
+
+                <!-- Resumen de Métricas de Auditoría -->
+                <div class="rejilla-totales-caja margin-bottom-20">
+                    <div class="tarjeta-total-caja destacado">
+                        <span class="etiqueta-total">Total Registros (Logs)</span>
+                        <span class="valor-total principal">48 eventos</span>
+                    </div>
+                    <div class="tarjeta-total-caja">
+                        <span class="etiqueta-total">Descargas / Exportaciones</span>
+                        <span class="valor-total neutro">14 archivos</span>
+                    </div>
+                    <div class="acciones-exportar">
+                        <button class="btn-secundario btn-exportar pdf" title="Exportar a PDF">
+                            <i class="fa-solid fa-file-pdf"></i> PDF
+                        </button>
+                        <button class="btn-secundario btn-exportar excel" title="Exportar a Excel">
+                            <i class="fa-solid fa-file-excel"></i> Excel
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Tabla de Trazabilidad y Logs -->
+                <div class="contenedor-tabla-datos">
+                    <table class="tabla-estandar">
+                        <thead>
+                            <tr>
+                                <th>Fecha y Hora</th>
+                                <th>Usuario</th>
+                                <th>Rol</th>
+                                <th>Reporte Consultado</th>
+                                <th class="texto-centro">Acción Realizada</th>
+                                <th>Detalle / Filtro Usado</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>30 Oct 2026, 08:35 a.m.</td>
+                                <td class="id-transaccion">Admin</td>
+                                <td>Administrador</td>
+                                <td>Reporte de ventas</td>
+                                <td class="texto-centro"><span class="insignia-auditoria exportacion-pdf"><i
+                                            class="fa-solid fa-file-pdf"></i> Exportó PDF</span></td>
+                                <td>Filtro: Día actual, todos los cajeros</td>
+                            </tr>
+                            <tr>
+                                <td>30 Oct 2026, 09:12 a.m.</td>
+                                <td class="id-transaccion">Carlos Mendoza</td>
+                                <td>Cajero</td>
+                                <td>Flujo de caja</td>
+                                <td class="texto-centro"><span class="insignia-auditoria consulta"><i
+                                            class="fa-solid fa-eye"></i> Visualización</span></td>
+                                <td>Filtro: Turno de mañana (Caja POS)</td>
+                            </tr>
+                            <tr>
+                                <td>30 Oct 2026, 10:05 a.m.</td>
+                                <td class="id-transaccion">Admin</td>
+                                <td>Administrador</td>
+                                <td>Reporte de inventarios</td>
+                                <td class="texto-centro"><span class="insignia-auditoria exportacion-excel"><i
+                                            class="fa-solid fa-file-excel"></i> Exportó Excel</span></td>
+                                <td>Filtro: Materia prima y Terminados</td>
+                            </tr>
+                            <tr>
+                                <td>30 Oct 2026, 11:40 a.m.</td>
+                                <td class="id-transaccion">Panadero principal</td>
+                                <td>Panadero</td>
+                                <td>Materia prima próxima a vencer</td>
+                                <td class="texto-centro"><span class="insignia-auditoria consulta"><i
+                                            class="fa-solid fa-eye"></i> Visualización</span></td>
+                                <td>Filtro: Rango 15 días</td>
+                            </tr>
+                            <tr>
+                                <td>30 Oct 2026, 12:15 p.m.</td>
+                                <td class="id-transaccion">Admin</td>
+                                <td>Administrador</td>
+                                <td>Reporte de mermas</td>
+                                <td class="texto-centro"><span class="insignia-auditoria exportacion-pdf"><i
+                                            class="fa-solid fa-file-pdf"></i> Exportó PDF</span></td>
+                                <td>Filtro: Mes vigente, todas las causas</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </main>
+    <script src="js/main.js"></script>
+</body>
+
+</html>

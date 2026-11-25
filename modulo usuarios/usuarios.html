@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pan en su punto - Gestión de usuarios</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/style.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+
+<body>
+    <nav class="menu-lateral">
+        <button id="btn-cerrar-menu" class="btn-cerrar-menu">
+            <i class="fa-solid fa-xmark"></i>
+        </button>
+        <div class="logo-contenedor">
+            <img src="img/logo.jpg" alt="Logo Pan en su punto">
+        </div>
+        <ul>
+            <li><a href="panel.html"><i class="fa-solid fa-house"></i> Inicio</a></li>
+            <li><a href="usuarios.html" class="activo"><i class="fa-solid fa-users"></i> Usuarios</a></li>
+            <li><a href="inventario-inicio.html"><i class="fa-solid fa-box"></i> Inventario</a></li>
+            <li><a href="reportes-inicio.html"><i class="fa-solid fa-book"></i> Recetas</a></li>
+            <li><a href="produccion-inicio.html"><i class="fa-solid fa-fire-burner"></i> Producción</a></li>
+            <li><a href="ventas-inicio.html"><i class="fa-solid fa-cash-register"></i> Ventas</a></li>
+            <li><a href="reportes-inicio.html"><i class="fa-solid fa-chart-line"></i> Reportes</a></li>
+            <li><a href="configuracion.html"><i class="fa-solid fa-gear"></i> Configuración</a></li>
+        </ul>
+    </nav>
+    <main class="contenido-principal">
+        <header class="barra-superior">
+            <div class="buscador">
+                <i class="fa-solid fa-magnifying-glass"></i>
+                <input type="text" placeholder="Buscar...">
+            </div>
+            <div class="iconos-usuario">
+                <i class="fa-regular fa-bell"></i>
+                <!-- Contenedor del avatar con su menú desplegable -->
+            <div class="contenedor-perfil-cabecera">
+                <button type="button" class="btn-avatar-usuario" id="btn-avatar-usuario" aria-expanded="false" aria-haspopup="true">
+                    <span>A</span>
+                </button>
+
+                <!-- Menú flotante -->
+                <div id="dropdown-menu-usuario" class="dropdown-usuario oculto" role="menu">
+                    <div class="encabezado-dropdown-usuario">
+                        <p class="nombre-usuario-sesion">Nathalia García</p>
+                        <span class="insignia-rol admin">Administrador</span>
+                    </div>
+                    <hr class="separador-dropdown">
+                    <ul class="lista-opciones-dropdown">
+                        <li>
+                            <a href="actualizar-contraseña.html" class="opcion-dropdown" role="menuitem">
+                                <i class="fa-solid fa-key"></i>
+                                <span>Cambiar contraseña</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="index.html" class="opcion-dropdown salir" role="menuitem">
+                                <i class="fa-solid fa-arrow-right-from-bracket"></i>
+                                <span>Cerrar sesión</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            </div>
+        </header>
+        <div class="cabecera-modulo">
+            <div class="textos-modulo">
+                <h2>Gestión de Usuarios</h2>
+                <p>Gestiona el personal de la panadería, roles y permisos de acceso.</p>
+            </div>
+            <a href="nuevo-usuario.html" class="btn-principal"><i class="fa-solid fa-user-plus"></i> Añadir Usuario</a>
+        </div>
+
+        <div class="tarjeta-datos">
+            <div class="barra-filtros">
+                <div class="filtros-select">
+                    <select>
+                        <option>Todos los Roles</option>
+                        <option>Administrador</option>
+                        <option>Cajero</option>
+                        <option>Panadero</option>
+                    </select>
+                    <select>
+                        <option>Estado: Todos</option>
+                        <option>Activo</option>
+                        <option>Inactivo</option>
+                    </select>
+                </div>
+                <input type="text" class="buscador-tabla" placeholder="Buscar por nombre o correo...">
+            </div>
+
+            <table class="tabla-usuarios">
+                <thead>
+                    <tr>
+                        <th>Nombre</th>
+                        <th>Correo</th>
+                        <th>Rol</th>
+                        <th>Estado</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Juan Pérez</td>
+                        <td>juanp@panensupunto.com</td>
+                        <td>Administrador</td>
+                        <td><span class="estado activo">● Activo</span></td>
+                        <td>
+                            <button class="btn-icono btn-abrir-password"><i class="fa-solid fa-key"></i></button>
+                            <a href="editar-usuario.html" class="btn-icono"><i class="fa-solid fa-pen"></i></a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>María Rodríguez</td>
+                        <td>mariar@panensupunto.com</td>
+                        <td>Cajero</td>
+                        <td><span class="estado activo">● Activo</span></td>
+                        <td>
+                            <button class="btn-icono btn-abrir-password"><i class="fa-solid fa-key"></i></button>
+                            <a href="editar-usuario.html" class="btn-icono"><i class="fa-solid fa-pen"></i></a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Javier Morales</td>
+                        <td>javierm@panensupunto.com</td>
+                        <td>Panadero</td>
+                        <td><span class="estado inactivo">● Inactivo</span></td>
+                        <td>
+                            <button class="btn-icono btn-abrir-password"><i class="fa-solid fa-key"></i></button>
+                            <a href="editar-usuario.html" class="btn-icono"><i class="fa-solid fa-pen"></i></a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <div class="paginacion-tabla">
+                <p>Mostrando 1 a 3 de 5 resultados</p>
+                <div class="numeros-pagina">
+                    <button class="btn-pagina">&lt;</button>
+                    <button class="btn-pagina activa">1</button>
+                    <button class="btn-pagina">2</button>
+                    <button class="btn-pagina">3</button>
+                    <button class="btn-pagina">&gt;</button>
+                </div>
+            </div>
+        </div>
+        <!-- Modal Confirmación Restablecer Contraseña -->
+        <div id="modal-password" class="fondo-modal oculto">
+            <div class="contenido-modal">
+                <div class="encabezado-modal-icono">
+                    <div class="icono-peligro"><i class="fa-solid fa-clock-rotate-left"></i></div>
+                    <h3>Restablecer contraseña</h3>
+                </div>
+                <p>¿Está seguro de que desea generar una contraseña temporal para este usuario?</p>
+
+                <div class="caja-info-usuario">
+                    <p id="modal-nombre-usuario"><i class="fa-regular fa-user"></i> Nombre: Juan Pérez</p>
+                    <p id="modal-correo-usuario"><i class="fa-regular fa-envelope"></i> Correo: juan@panensupunto.com
+                    </p>
+                </div>
+
+                <div class="acciones-modal">
+                    <button type="button" id="btn-cancelar-password" class="btn-secundario">Cancelar</button>
+                    <button type="button" id="btn-confirmar-password" class="btn-principal"><i
+                            class="fa-solid fa-key"></i> Generar contraseña temporal</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Modal Contraseña Generada -->
+        <div id="modal-password-generada" class="fondo-modal oculto">
+            <div class="contenido-modal">
+                <img src="img/logo.jpg" alt="Logo Pan en su punto" class="logo-modal">
+
+                <p class="etiqueta-modal">Nueva credencial temporal:</p>
+                <div class="caja-copiar">
+                    <span id="texto-contrasena-temp">Pp#2026Temp!</span>
+                    <button type="button" id="btn-copiar-password" class="btn-secundario"><i
+                            class="fa-regular fa-copy"></i> Copiar</button>
+                </div>
+
+                <div class="caja-advertencia">
+                    <div class="icono-escudo"><i class="fa-solid fa-shield-halved"></i></div>
+                    <p>Esta contraseña es temporal. El usuario deberá cambiarla obligatoriamente en su próximo inicio de
+                        sesión por motivos de seguridad.</p>
+                </div>
+
+                <button type="button" id="btn-cerrar-generada" class="btn-principal boton-ancho">Cerrar</button>
+            </div>
+        </div>
+    </main>
+    <script src="js/main.js"></script>
+</body>
+
+</html>

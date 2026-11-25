@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pan en su punto - Gestión de inventarios</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/style.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+
+<body>
+    <nav class="menu-lateral">
+        <button id="btn-cerrar-menu" class="btn-cerrar-menu">
+            <i class="fa-solid fa-xmark"></i>
+        </button>
+        <div class="logo-contenedor">
+            <img src="img/logo.jpg" alt="Logo Pan en su punto">
+        </div>
+        <ul>
+            <li><a href="panel.html"><i class="fa-solid fa-house"></i> Inicio</a></li>
+            <li><a href="usuarios.html"><i class="fa-solid fa-users"></i> Usuarios</a></li>
+            <li><a href="inventario-inicio.html" class="activo"><i class="fa-solid fa-box"></i> Inventario</a></li>
+            <li><a href="recetas-inicio.html"><i class="fa-solid fa-book"></i> Recetas</a></li>
+            <li><a href="produccion-inicio.html"><i class="fa-solid fa-fire-burner"></i> Producción</a></li>
+            <li><a href="ventas-inicio.html"><i class="fa-solid fa-cash-register"></i> Ventas</a></li>
+            <li><a href="reportes-inicio.html"><i class="fa-solid fa-chart-line"></i> Reportes</a></li>
+            <li><a href="configuracion.html"><i class="fa-solid fa-gear"></i> Configuración</a></li>
+        </ul>
+    </nav>
+    <main class="contenido-principal">
+        <header class="barra-superior">
+            <div class="buscador">
+                <i class="fa-solid fa-magnifying-glass"></i>
+                <input type="text" placeholder="Buscar...">
+            </div>
+            <div class="iconos-usuario">
+                <i class="fa-regular fa-bell"></i>
+                <div class="avatar-usuario">A</div>
+            </div>
+        </header>
+
+        <div class="encabezado-seccion">
+            <div class="titulos">
+                <h2>Productos Terminados</h2>
+                <p>Gestiona el inventario de productos terminados listos para la venta.</p>
+            </div>
+            <button class="btn-principal" onclick="window.location.href='nuevo-producto-terminado.html'">
+                <i class="fa-solid fa-plus"></i> Nuevo producto
+            </button>
+        </div>
+        <div class="tarjeta-datos">
+            <div class="controles-tabla">
+                <div class="filtros">
+                    <select>
+                        <option>Estado: Todos</option>
+                        <option>Disponible</option>
+                        <option>Agotado</option>
+                    </select>
+                </div>
+                <div class="buscador-tabla">
+                    <input type="text" placeholder="Buscar producto terminado...">
+                </div>
+            </div>
+            <table class="tabla-datos">
+                <thead>
+                    <tr>
+                        <th>Código</th>
+                        <th>Producto</th>
+                        <th>Categoría</th>
+                        <th>Precio Venta</th>
+                        <th>Stock Disponible</th>
+                        <th>Estado</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>PT-001</td>
+                        <td>Pan Aliñado</td>
+                        <td>Panadería</td>
+                        <td>$ 2.500</td>
+                        <td>45 und</td>
+                        <td class="estado-disponible">Disponible</td>
+                        <td>
+                            <a href="#" class="btn-icono btn-editar-producto"><i class="fa-solid fa-pen"></i></a>
+                            <a href="#" class="btn-icono btn-eliminar-fila"><i class="fa-solid fa-trash"></i></a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>PT-002</td>
+                        <td>Pan queso</td>
+                        <td>Panadería</td>
+                        <td>$ 8.000</td>
+                        <td>25 und</td>
+                        <td class="estado-agotado">Agotado</td>
+                        <td>
+                            <a href="#" class="btn-icono btn-editar-producto"><i class="fa-solid fa-pen"></i></a>
+                            <a href="#" class="btn-icono btn-eliminar-fila"><i class="fa-solid fa-trash"></i></a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>PT-003</td>
+                        <td>Torta de chocolate</td>
+                        <td>Pasteleria</td>
+                        <td>$ 6.000</td>
+                        <td>12 und</td>
+                        <td class="estado-disponible">Disponible</td>
+                        <td>
+                            <a href="#" class="btn-icono btn-editar-producto"><i class="fa-solid fa-pen"></i></a>
+                            <a href="#" class="btn-icono btn-eliminar-fila"><i class="fa-solid fa-trash"></i></a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>PT-004</td>
+                        <td>Pandebono</td>
+                        <td>Panadería</td>
+                        <td>$ 2.500</td>
+                        <td>30 und</td>
+                        <td class="estado-disponible">Disponible</td>
+                        <td>
+                            <a href="#" class="btn-icono btn-editar-producto"><i class="fa-solid fa-pen"></i></a>
+                            <a href="#" class="btn-icono btn-eliminar-fila"><i class="fa-solid fa-trash"></i></a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <div class="paginacion">
+                <span class="texto-resultados">Mostrando 1 a 4 de 15 resultados</span>
+                <div class="controles-pag">
+                    <button class="btn-pag">&lt;</button>
+                    <button class="btn-pag activo">1</button>
+                    <button class="btn-pag">2</button>
+                    <button class="btn-pag">3</button>
+                    <button class="btn-pag">&gt;</button>
+                </div>
+            </div>
+        </div>
+        <!-- Modal de Eliminación -->
+        <div id="modal-eliminar" class="fondo-modal oculto">
+            <div class="contenido-modal centrado">
+                <div class="icono-peligro">
+                    <i class="fa-solid fa-trash"></i>
+                </div>
+                <h3>¿Eliminar producto terminado?</h3>
+                <p>Esta acción removerá al producto de manera permanente del sistema.</p>
+                <div class="acciones-modal">
+                    <button type="button" id="btn-cancelar-eliminar" class="btn-secundario">Cancelar</button>
+                    <button type="button" id="btn-confirmar-eliminar" class="btn-principal">Eliminar</button>
+                </div>
+            </div>
+        </div>
+    </main>
+    <script src="js/main.js"></script>
+</body>
+
+</html>

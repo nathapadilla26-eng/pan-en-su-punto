@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pan en su punto - Gestión de ventas</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/style.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+
+<body>
+    <nav class="menu-lateral">
+        <button id="btn-cerrar-menu" class="btn-cerrar-menu">
+            <i class="fa-solid fa-xmark"></i>
+        </button>
+        <div class="logo-contenedor">
+            <img src="img/logo.jpg" alt="Logo Pan en su punto">
+        </div>
+        <ul>
+            <li><a href="panel.html"><i class="fa-solid fa-house"></i> Inicio</a></li>
+            <li><a href="usuarios.html"><i class="fa-solid fa-users"></i> Usuarios</a></li>
+            <li><a href="inventario-inicio.html"><i class="fa-solid fa-box"></i> Inventario</a></li>
+            <li><a href="recetas-inicio.html"><i class="fa-solid fa-book"></i> Recetas</a></li>
+            <li><a href="produccion-inicio.html"><i class="fa-solid fa-fire-burner"></i> Producción</a></li>
+            <li><a href="ventas-inicio.html" class="activo"><i class="fa-solid fa-cash-register"></i> Ventas</a></li>
+            <li><a href="reportes-inicio.html"><i class="fa-solid fa-chart-line"></i> Reportes</a></li>
+            <li><a href="configuracion.html"><i class="fa-solid fa-gear"></i> Configuración</a></li>
+        </ul>
+    </nav>
+    <main class="contenido-principal">
+        <header class="barra-superior">
+            <div class="buscador">
+                <i class="fa-solid fa-magnifying-glass"></i>
+                <input type="text" placeholder="Buscar...">
+            </div>
+            <div class="iconos-usuario">
+                <i class="fa-regular fa-bell"></i>
+                <div class="avatar-usuario">A</div>
+            </div>
+        </header>
+        <div class="layout-pos">
+            <!-- Sección Izquierda: Catálogo de Productos -->
+            <section class="pos-catalogo">
+                <div class="cabecera-catalogo">
+                    <div class="buscador-pos">
+                        <i class="fa-solid fa-magnifying-glass"></i>
+                        <input type="text" id="buscador-pos" placeholder="Buscar producto por nombre o código...">
+                    </div>
+                    <div class="filtros-categoria">
+                        <button type="button" class="btn-categoria activo" data-categoria="todos">Todos</button>
+                        <button type="button" class="btn-categoria" data-categoria="panaderia">Panadería</button>
+                        <button type="button" class="btn-categoria" data-categoria="pasteleria">Pastelería</button>
+                        <button type="button" class="btn-categoria" data-categoria="bebidas">Bebidas</button>
+                    </div>
+                </div>
+
+                <div class="grid-productos-pos">
+                    <!-- Categoría: Panadería -->
+                    <div class="tarjeta-producto-pos" data-categoria="panaderia">
+                        <div class="info-producto-pos">
+                            <span class="codigo-pos">PROD-001</span>
+                            <h4>Pan artesanal</h4>
+                            <p class="stock-pos">Stock: 50 und</p>
+                        </div>
+                        <div class="precio-producto-pos">
+                            <span>$2.500</span>
+                        </div>
+                    </div>
+
+                    <div class="tarjeta-producto-pos" data-categoria="panaderia">
+                        <div class="info-producto-pos">
+                            <span class="codigo-pos">PROD-002</span>
+                            <h4>Baguette rústica</h4>
+                            <p class="stock-pos">Stock: 15 und</p>
+                        </div>
+                        <div class="precio-producto-pos">
+                            <span>$4.000</span>
+                        </div>
+                    </div>
+
+                    <div class="tarjeta-producto-pos" data-categoria="panaderia">
+                        <div class="info-producto-pos">
+                            <span class="codigo-pos">PROD-003</span>
+                            <h4>Croissant de mantequilla</h4>
+                            <p class="stock-pos">Stock: 30 und</p>
+                        </div>
+                        <div class="precio-producto-pos">
+                            <span>$3.500</span>
+                        </div>
+                    </div>
+
+                    <div class="tarjeta-producto-pos" data-categoria="panaderia">
+                        <div class="info-producto-pos">
+                            <span class="codigo-pos">PROD-004</span>
+                            <h4>Pan de bono</h4>
+                            <p class="stock-pos">Stock: 40 und</p>
+                        </div>
+                        <div class="precio-producto-pos">
+                            <span>$1.800</span>
+                        </div>
+                    </div>
+
+                    <div class="tarjeta-producto-pos" data-categoria="panaderia">
+                        <div class="info-producto-pos">
+                            <span class="codigo-pos">PROD-005</span>
+                            <h4>Buñuelo tradicional</h4>
+                            <p class="stock-pos">Stock: 45 und</p>
+                        </div>
+                        <div class="precio-producto-pos">
+                            <span>$1.500</span>
+                        </div>
+                    </div>
+
+                    <!-- Categoría: Pastelería -->
+                    <div class="tarjeta-producto-pos" data-categoria="pasteleria">
+                        <div class="info-producto-pos">
+                            <span class="codigo-pos">PROD-006</span>
+                            <h4>Torta envinada (porción)</h4>
+                            <p class="stock-pos">Stock: 20 und</p>
+                        </div>
+                        <div class="precio-producto-pos">
+                            <span>$5.000</span>
+                        </div>
+                    </div>
+
+                    <div class="tarjeta-producto-pos" data-categoria="pasteleria">
+                        <div class="info-producto-pos">
+                            <span class="codigo-pos">PROD-007</span>
+                            <h4>Cheesecake de frutos rojos</h4>
+                            <p class="stock-pos">Stock: 12 und</p>
+                        </div>
+                        <div class="precio-producto-pos">
+                            <span>$6.500</span>
+                        </div>
+                    </div>
+
+                    <div class="tarjeta-producto-pos" data-categoria="pasteleria">
+                        <div class="info-producto-pos">
+                            <span class="codigo-pos">PROD-008</span>
+                            <h4>Milhoja tradicional</h4>
+                            <p class="stock-pos">Stock: 18 und</p>
+                        </div>
+                        <div class="precio-producto-pos">
+                            <span>$4.500</span>
+                        </div>
+                    </div>
+
+                    <div class="tarjeta-producto-pos" data-categoria="pasteleria">
+                        <div class="info-producto-pos">
+                            <span class="codigo-pos">PROD-009</span>
+                            <h4>Muffin de arándanos</h4>
+                            <p class="stock-pos">Stock: 16 und</p>
+                        </div>
+                        <div class="precio-producto-pos">
+                            <span>$3.800</span>
+                        </div>
+                    </div>
+
+                    <!-- Categoría: Bebidas -->
+                    <div class="tarjeta-producto-pos" data-categoria="bebidas">
+                        <div class="info-producto-pos">
+                            <span class="codigo-pos">PROD-010</span>
+                            <h4>Café americano</h4>
+                            <p class="stock-pos">Stock: 50 und</p>
+                        </div>
+                        <div class="precio-producto-pos">
+                            <span>$3.000</span>
+                        </div>
+                    </div>
+
+                    <div class="tarjeta-producto-pos" data-categoria="bebidas">
+                        <div class="info-producto-pos">
+                            <span class="codigo-pos">PROD-011</span>
+                            <h4>Café con leche</h4>
+                            <p class="stock-pos">Stock: 40 und</p>
+                        </div>
+                        <div class="precio-producto-pos">
+                            <span>$3.500</span>
+                        </div>
+                    </div>
+
+                    <div class="tarjeta-producto-pos" data-categoria="bebidas">
+                        <div class="info-producto-pos">
+                            <span class="codigo-pos">PROD-012</span>
+                            <h4>Chocolate caliente</h4>
+                            <p class="stock-pos">Stock: 25 und</p>
+                        </div>
+                        <div class="precio-producto-pos">
+                            <span>$4.000</span>
+                        </div>
+                    </div>
+
+                    <div class="tarjeta-producto-pos" data-categoria="bebidas">
+                        <div class="info-producto-pos">
+                            <span class="codigo-pos">PROD-013</span>
+                            <h4>Jugo natural</h4>
+                            <p class="stock-pos">Stock: 20 und</p>
+                        </div>
+                        <div class="precio-producto-pos">
+                            <span>$4.500</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Sección Derecha: Tiquete / Factura -->
+            <aside class="pos-ticket">
+                <div class="cabecera-ticket">
+                    <h3>Factura actual</h3>
+                    <span class="fecha-ticket">28 Oct 2026</span>
+                </div>
+
+                <div class="lista-items-ticket">
+                    <!-- Ítem agregado -->
+                    <div class="item-ticket">
+                        <div class="detalle-item-ticket">
+                            <p class="nombre-item">Pan artesanal</p>
+                            <p class="precio-item">$2.500 x und</p>
+                        </div>
+                        <div class="controles-cantidad">
+                            <button type="button" class="btn-restar"><i class="fa-solid fa-minus"></i></button>
+                            <span class="cantidad-item">2</span>
+                            <button type="button" class="btn-sumar"><i class="fa-solid fa-plus"></i></button>
+                        </div>
+                        <div class="subtotal-item">
+                            <span>$5.000</span>
+                            <button type="button" class="btn-eliminar-item"><i
+                                    class="fa-solid fa-trash-can"></i></button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="resumen-cobro">
+                    <div class="linea-resumen">
+                        <span>Subtotal</span>
+                        <span>$5.000</span>
+                    </div>
+                    <div class="linea-resumen-ticket linea-descuento">
+                        <span id="btn-abrir-modal-descuento" class="enlace-descuento">
+                            <i class="fa-solid fa-tag"></i> Aplicar descuento
+                        </span>
+                        <span id="ticket-descuento" class="valor-descuento">$0</span>
+                    </div>
+                    <div class="linea-resumen">
+                        <span>Impuestos (IVA/Impo)</span>
+                        <span>$0</span>
+                    </div>
+                    <div class="linea-resumen total-cobro">
+                        <span>Total a pagar</span>
+                        <span>$5.000</span>
+                    </div>
+
+                    <div class="acciones-ticket">
+                        <button type="button" class="btn-secundario boton-ancho"
+                            id="btn-cancelar-venta">Cancelar</button>
+                        <button type="button" class="btn-principal boton-ancho" id="btn-procesar-pago">Procesar
+                            pago</button>
+                    </div>
+                </div>
+            </aside>
+        </div>
+        <!-- Modal de Procesamiento de Pago -->
+        <div id="modal-procesar-pago" class="modal oculto">
+            <div class="modal-pago-contenedor">
+                <!-- Columna izquierda: Resumen de cobro -->
+                <div class="pago-col-resumen">
+                    <div class="encabezado-pago">
+                        <h3>Procesamiento de pago</h3>
+                        <p class="detalle-pedido">Pedido #4092 - Mostrador</p>
+                    </div>
+
+                    <div class="caja-valores-pago">
+                        <div class="linea-valor">
+                            <span>Subtotal</span>
+                            <span id="modal-subtotal">$0</span>
+                        </div>
+                        <div class="linea-valor">
+                            <span>Impuestos (8%)</span>
+                            <span id="modal-impuestos">$0</span>
+                        </div>
+                        <div class="linea-valor total">
+                            <span>Total a pagar</span>
+                            <span id="modal-total" class="resaltado-total">$0</span>
+                        </div>
+                    </div>
+
+                    <div class="seccion-metodo-pago">
+                        <p class="etiqueta-metodo">Método de pago</p>
+                        <div class="opciones-metodo">
+                            <button type="button" class="btn-metodo activo" data-metodo="efectivo">Efectivo</button>
+                            <button type="button" class="btn-metodo" data-metodo="tarjeta">Tarjeta</button>
+                            <button type="button" class="btn-metodo" data-metodo="digital">Transferencia</button>
+                        </div>
+                    </div>
+
+                    <button type="button" class="btn-secundario boton-cancelar-pago"
+                        id="btn-cerrar-modal-pago">Cancelar</button>
+                </div>
+
+                <!-- Columna derecha: Teclado y cálculo de cambio -->
+                <!-- Columna derecha: Dinámica según método -->
+                <div class="pago-col-calculadora">
+
+                    <!-- Zona Efectivo -->
+                    <div id="zona-efectivo">
+                        <label for="display-monto-recibido" class="etiqueta-recibido">Monto recibido</label>
+                        <div class="caja-monto-recibido">
+                            <span class="signo-peso">$</span>
+                            <input type="text" id="display-monto-recibido" value="0" readonly>
+                        </div>
+
+                        <p class="texto-cambio">Cambio a devolver: <span id="monto-cambio">$0</span></p>
+
+                        <div class="teclado-pos">
+                            <button type="button" class="tecla" data-num="1">1</button>
+                            <button type="button" class="tecla" data-num="2">2</button>
+                            <button type="button" class="tecla" data-num="3">3</button>
+                            <button type="button" class="tecla" data-num="4">4</button>
+                            <button type="button" class="tecla" data-num="5">5</button>
+                            <button type="button" class="tecla" data-num="6">6</button>
+                            <button type="button" class="tecla" data-num="7">7</button>
+                            <button type="button" class="tecla" data-num="8">8</button>
+                            <button type="button" class="tecla" data-num="9">9</button>
+                            <button type="button" class="tecla funcion" id="btn-teclado-clear">C</button>
+                            <button type="button" class="tecla" data-num="0">0</button>
+                            <button type="button" class="tecla funcion" id="btn-teclado-backspace"><i
+                                    class="fa-solid fa-delete-left"></i></button>
+                        </div>
+                    </div>
+
+                    <!-- Zona Electrónico (Oculta por defecto) -->
+                    <div id="zona-electronico" class="estado-pago-electronico oculto">
+                        <i class="fa-solid fa-credit-card"></i>
+                        <h4>Pago Electrónico</h4>
+                        <p id="texto-metodo-electronico">Procesa el pago en el datáfono.</p>
+                    </div>
+
+                    <button type="button" class="btn-principal boton-confirmar-pago" id="btn-confirmar-pago">
+                        Confirmar Pago <i class="fa-regular fa-circle-check"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <!-- Modal para aplicar descuento -->
+        <div id="modal-aplicar-descuento" class="modal oculto">
+            <div class="modal-descuento-contenedor">
+                <div class="cabecera-modal-descuento">
+                    <div class="icono-modal-descuento">
+                        <i class="fa-solid fa-tag"></i>
+                    </div>
+                    <div>
+                        <h3>Aplicar descuento</h3>
+                        <p>Selecciona el tipo de descuento o ingresa un valor directo.</p>
+                    </div>
+                </div>
+
+                <form id="form-descuento" onsubmit="return false;">
+                    <!-- Tipo de descuento: Porcentaje o Valor fijo -->
+                    <div class="grupo-campo-modal">
+                        <label>Tipo de descuento</label>
+                        <div class="selector-tipo-descuento">
+                            <button type="button" class="btn-tipo-desc activo" data-tipo="porcentaje">Porcentaje
+                                (%)</button>
+                            <button type="button" class="btn-tipo-desc" data-tipo="fijo">Valor fijo ($)</button>
+                        </div>
+                    </div>
+
+                    <!-- Botones rápidos de porcentaje -->
+                    <div class="atajos-porcentaje" id="contenedor-atajos-porcentaje">
+                        <button type="button" class="btn-atajo-desc" data-valor="5">5%</button>
+                        <button type="button" class="btn-atajo-desc" data-valor="10">10%</button>
+                        <button type="button" class="btn-atajo-desc" data-valor="15">15%</button>
+                        <button type="button" class="btn-atajo-desc" data-valor="20">20%</button>
+                    </div>
+
+                    <!-- Input del valor -->
+                    <div class="grupo-campo-modal">
+                        <label for="input-valor-descuento" id="label-valor-descuento">Valor del descuento (%)</label>
+                        <div class="caja-input-descuento">
+                            <span class="simbolo-descuento" id="simbolo-descuento">%</span>
+                            <input type="number" id="input-valor-descuento" placeholder="0" min="0" step="any" required>
+                        </div>
+                    </div>
+
+                    <!-- Motivo del descuento -->
+                    <div class="grupo-campo-modal">
+                        <label for="select-motivo-descuento">Motivo</label>
+                        <select id="select-motivo-descuento" class="select-modal">
+                            <option value="promocion">Promoción del día</option>
+                            <option value="empleado">Descuento de empleado / colaborador</option>
+                            <option value="cortesia">Cortesía comercial</option>
+                            <option value="merma">Hora feliz / Próximo a vencer</option>
+                        </select>
+                    </div>
+
+                    <!-- Acciones -->
+                    <div class="acciones-modal-descuento">
+                        <button type="button" class="btn-quitar-desc" id="btn-quitar-descuento">Quitar
+                            descuento</button>
+                        <div class="botones-principales-modal">
+                            <button type="button" class="btn-secundario" id="btn-cancelar-descuento">Cancelar</button>
+                            <button type="button" class="btn-principal" id="btn-guardar-descuento">Aplicar</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </main>
+    </div>
+    <script src="js/main.js"></script>
+</body>
+
+</html>

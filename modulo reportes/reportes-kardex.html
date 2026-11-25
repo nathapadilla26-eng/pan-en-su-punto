@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pan en su punto - Gestión de reportes</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/style.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+
+<body>
+    <nav class="menu-lateral">
+        <button id="btn-cerrar-menu" class="btn-cerrar-menu">
+            <i class="fa-solid fa-xmark"></i>
+        </button>
+        <div class="logo-contenedor">
+            <img src="img/logo.jpg" alt="Logo Pan en su punto">
+        </div>
+        <ul>
+            <li><a href="panel.html"><i class="fa-solid fa-house"></i> Inicio</a></li>
+            <li><a href="usuarios.html"><i class="fa-solid fa-users"></i> Usuarios</a></li>
+            <li><a href="inventario-inicio.html"><i class="fa-solid fa-box"></i> Inventario</a></li>
+            <li><a href="recetas-inicio.html"><i class="fa-solid fa-book"></i> Recetas</a></li>
+            <li><a href="produccion-inicio.html"><i class="fa-solid fa-fire-burner"></i> Producción</a></li>
+            <li><a href="ventas-inicio.html"><i class="fa-solid fa-cash-register"></i> Ventas</a></li>
+            <li><a href="reportes-inicio.html" class="activo"><i class="fa-solid fa-chart-line"></i> Reportes</a></li>
+            <li><a href="configuracion.html"><i class="fa-solid fa-gear"></i> Configuración</a></li>
+        </ul>
+    </nav>
+    <main class="contenido-principal">
+        <header class="barra-superior">
+            <div class="buscador">
+                <i class="fa-solid fa-magnifying-glass"></i>
+                <input type="text" placeholder="Buscar...">
+            </div>
+            <div class="iconos-usuario">
+                <i class="fa-regular fa-bell"></i>
+                <div class="avatar-usuario">A</div>
+            </div>
+        </header>
+        <!-- Contenido: Reporte Kardex de Movimientos -->
+        <div class="contenedor-reportes-detalle">
+
+            <!-- Cabecera -->
+            <div class="cabecera-reportes-detalle">
+                <div class="titulos-configuracion">
+                    <h2>Reporte Kardex (Movimientos)</h2>
+                    <p>Historial trazable de entradas, salidas y saldo físico de existencias por ítem en bodega.</p>
+                </div>
+                <div class="acciones-configuracion">
+                    <a href="reportes-inicio.html" class="btn-volver-derecha">
+                        <i class="fa-solid fa-arrow-left"></i> Volver al panel
+                    </a>
+                </div>
+            </div>
+
+            <!-- Panel de Filtros -->
+            <div class="tarjeta-filtros-reporte">
+                <form id="form-generar-reporte-kardex">
+                    <div class="rejilla-filtros">
+                        <div class="grupo-filtro">
+                            <label for="filtro-item-kardex">Ítem específico</label>
+                            <select id="filtro-item-kardex" class="select-modal" required>
+                                <optgroup label="Materias primas">
+                                    <option value="mp-1" selected>Harina de Trigo Especial (kg)</option>
+                                    <option value="mp-2">Levadura fresca (Bloque 500g)</option>
+                                    <option value="mp-3">Mantequilla sin sal (kg)</option>
+                                    <option value="mp-4">Azúcar refinada (kg)</option>
+                                </optgroup>
+                                <optgroup label="Productos terminados">
+                                    <option value="pt-1">Pan artesanal (und)</option>
+                                    <option value="pt-2">Croissant tradicional (und)</option>
+                                    <option value="pt-3">Torta envinada (und)</option>
+                                </optgroup>
+                            </select>
+                        </div>
+                        <div class="grupo-filtro">
+                            <label for="filtro-fecha-inicio-kardex">Fecha inicial</label>
+                            <input type="date" id="filtro-fecha-inicio-kardex" class="input-texto-modal" required>
+                        </div>
+                        <div class="grupo-filtro">
+                            <label for="filtro-fecha-fin-kardex">Fecha final</label>
+                            <input type="date" id="filtro-fecha-fin-kardex" class="input-texto-modal" required>
+                        </div>
+                        <div class="grupo-filtro">
+                            <label for="filtro-tipo-movimiento-kardex">Concepto de movimiento</label>
+                            <select id="filtro-tipo-movimiento-kardex" class="select-modal">
+                                <option value="todos">Todos los conceptos</option>
+                                <option value="compra">Compra a proveedor (Entrada)</option>
+                                <option value="produccion">Producción (Entrada/Salida)</option>
+                                <option value="venta">Venta POS (Salida)</option>
+                                <option value="merma">Ajuste por merma (Salida)</option>
+                                <option value="anulacion">Anulación de venta (Reingreso)</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="acciones-filtros">
+                        <button type="submit" class="btn-principal">
+                            <i class="fa-solid fa-magnifying-glass"></i> Generar Kardex
+                        </button>
+                    </div>
+                </form>
+            </div>
+
+            <!-- Resultados del Reporte (Ocultos por defecto) -->
+            <div id="resultados-reporte-kardex" class="oculto">
+
+                <!-- Resumen del Balance de Movimientos -->
+                <div class="rejilla-totales-caja margin-bottom-20">
+                    <div class="tarjeta-total-caja">
+                        <span class="etiqueta-total">Total Entradas</span>
+                        <span class="valor-total positivo">+250 kg</span>
+                    </div>
+                    <div class="tarjeta-total-caja">
+                        <span class="etiqueta-total">Total Salidas</span>
+                        <span class="valor-total negativo">-185 kg</span>
+                    </div>
+                    <div class="tarjeta-total-caja destacado">
+                        <span class="etiqueta-total">Saldo Actual en Bodega</span>
+                        <span class="valor-total principal">65 kg</span>
+                    </div>
+                    <div class="acciones-exportar">
+                        <button class="btn-secundario btn-exportar pdf" title="Exportar a PDF">
+                            <i class="fa-solid fa-file-pdf"></i> PDF
+                        </button>
+                        <button class="btn-secundario btn-exportar excel" title="Exportar a Excel">
+                            <i class="fa-solid fa-file-excel"></i> Excel
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Tabla de Movimientos Kardex -->
+                <div class="contenedor-tabla-datos">
+                    <table class="tabla-estandar">
+                        <thead>
+                            <tr>
+                                <th>Fecha y Hora</th>
+                                <th>Concepto</th>
+                                <th>Comprobante / Ref.</th>
+                                <th class="texto-derecha">Entrada (+)</th>
+                                <th class="texto-derecha">Salida (-)</th>
+                                <th class="texto-derecha">Saldo en Bodega</th>
+                                <th class="texto-centro">Responsable</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>26 Oct 2026, 07:00 a.m.</td>
+                                <td><span class="insignia-kardex neutro">Inventario inicial</span></td>
+                                <td>Apertura de mes</td>
+                                <td class="texto-derecha">-</td>
+                                <td class="texto-derecha">-</td>
+                                <td class="texto-derecha"><strong>50 kg</strong></td>
+                                <td class="texto-centro">Admin</td>
+                            </tr>
+                            <tr>
+                                <td>27 Oct 2026, 09:15 a.m.</td>
+                                <td><span class="insignia-kardex entrada">Compra de materia prima</span></td>
+                                <td class="id-transaccion">#FAC-8841</td>
+                                <td class="texto-derecha valor-positivo">+200 kg</td>
+                                <td class="texto-derecha">-</td>
+                                <td class="texto-derecha"><strong>250 kg</strong></td>
+                                <td class="texto-centro">Admin</td>
+                            </tr>
+                            <tr>
+                                <td>28 Oct 2026, 06:30 a.m.</td>
+                                <td><span class="insignia-kardex salida">Consumo en producción</span></td>
+                                <td>#ORD-2026-104</td>
+                                <td class="texto-derecha">-</td>
+                                <td class="texto-derecha valor-negativo">-120 kg</td>
+                                <td class="texto-derecha"><strong>130 kg</strong></td>
+                                <td class="texto-centro">Panadero</td>
+                            </tr>
+                            <tr>
+                                <td>29 Oct 2026, 06:15 a.m.</td>
+                                <td><span class="insignia-kardex salida">Consumo en producción</span></td>
+                                <td>#ORD-2026-105</td>
+                                <td class="texto-derecha">-</td>
+                                <td class="texto-derecha valor-negativo">-60 kg</td>
+                                <td class="texto-derecha"><strong>70 kg</strong></td>
+                                <td class="texto-centro">Panadero</td>
+                            </tr>
+                            <tr>
+                                <td>30 Oct 2026, 11:45 a.m.</td>
+                                <td><span class="insignia-kardex salida">Ajuste por merma</span></td>
+                                <td>#MERM-042</td>
+                                <td class="texto-derecha">-</td>
+                                <td class="texto-derecha valor-negativo">-5 kg</td>
+                                <td class="texto-derecha"><strong>65 kg</strong></td>
+                                <td class="texto-centro">Admin</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </main>
+    <script src="js/main.js"></script>
+</body>
+
+</html>

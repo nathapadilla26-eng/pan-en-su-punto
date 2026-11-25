@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pan en su punto - Gestión de reportes</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/style.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+
+<body>
+    <nav class="menu-lateral">
+        <button id="btn-cerrar-menu" class="btn-cerrar-menu">
+            <i class="fa-solid fa-xmark"></i>
+        </button>
+        <div class="logo-contenedor">
+            <img src="img/logo.jpg" alt="Logo Pan en su punto">
+        </div>
+        <ul>
+            <li><a href="panel.html"><i class="fa-solid fa-house"></i> Inicio</a></li>
+            <li><a href="usuarios.html"><i class="fa-solid fa-users"></i> Usuarios</a></li>
+            <li><a href="inventario-inicio.html"><i class="fa-solid fa-box"></i> Inventario</a></li>
+            <li><a href="recetas-inicio.html"><i class="fa-solid fa-book"></i> Recetas</a></li>
+            <li><a href="produccion-inicio.html"><i class="fa-solid fa-fire-burner"></i> Producción</a></li>
+            <li><a href="ventas-inicio.html"><i class="fa-solid fa-cash-register"></i> Ventas</a></li>
+            <li><a href="reportes-inicio.html" class="activo"><i class="fa-solid fa-chart-line"></i> Reportes</a></li>
+            <li><a href="configuracion.html"><i class="fa-solid fa-gear"></i> Configuración</a></li>
+        </ul>
+    </nav>
+    <main class="contenido-principal">
+        <header class="barra-superior">
+            <div class="buscador">
+                <i class="fa-solid fa-magnifying-glass"></i>
+                <input type="text" placeholder="Buscar...">
+            </div>
+            <div class="iconos-usuario">
+                <i class="fa-regular fa-bell"></i>
+                <div class="avatar-usuario">A</div>
+            </div>
+        </header>
+        <!-- Contenido: Reporte de Producción -->
+        <div class="contenedor-reportes-detalle">
+
+            <!-- Cabecera -->
+            <div class="cabecera-reportes-detalle">
+                <div class="titulos-configuracion">
+                    <h2>Reporte de producción</h2>
+                    <p>Analiza el cumplimiento de órdenes de horneado y la variación entre lo planificado y lo
+                        producido.</p>
+                </div>
+                <div class="acciones-configuracion">
+                    <a href="reportes-inicio.html" class="btn-volver-derecha">
+                        <i class="fa-solid fa-arrow-left"></i> Volver al panel
+                    </a>
+                </div>
+            </div>
+
+            <!-- Panel de Filtros -->
+            <div class="tarjeta-filtros-reporte">
+                <form id="form-generar-reporte-produccion">
+                    <div class="rejilla-filtros">
+                        <div class="grupo-filtro">
+                            <label for="filtro-fecha-inicio-prod">Fecha inicial</label>
+                            <input type="date" id="filtro-fecha-inicio-prod" class="input-texto-modal" required>
+                        </div>
+                        <div class="grupo-filtro">
+                            <label for="filtro-fecha-fin-prod">Fecha final</label>
+                            <input type="date" id="filtro-fecha-fin-prod" class="input-texto-modal" required>
+                        </div>
+                        <div class="grupo-filtro">
+                            <label for="filtro-estado-orden">Estado de la orden</label>
+                            <select id="filtro-estado-orden" class="select-modal">
+                                <option value="todos">Todos los estados</option>
+                                <option value="finalizada">Finalizada</option>
+                                <option value="en-proceso">En proceso</option>
+                                <option value="pendiente">Pendiente</option>
+                                <option value="anulada">Anulada</option>
+                            </select>
+                        </div>
+                        <div class="grupo-filtro">
+                            <label for="filtro-producto-prod">Producto terminado</label>
+                            <select id="filtro-producto-prod" class="select-modal">
+                                <option value="todos">Todos los productos</option>
+                                <option value="pan-artesanal">Pan artesanal</option>
+                                <option value="croissant">Croissant tradicional</option>
+                                <option value="torta-envinada">Torta envinada</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="acciones-filtros">
+                        <button type="submit" class="btn-principal">
+                            <i class="fa-solid fa-magnifying-glass"></i> Generar reporte
+                        </button>
+                    </div>
+                </form>
+            </div>
+
+            <!-- Resultados del Reporte (Ocultos por defecto) -->
+            <div id="resultados-reporte-produccion" class="oculto">
+
+                <!-- Resumen de Métricas -->
+                <div class="rejilla-totales-caja margin-bottom-20">
+                    <div class="tarjeta-total-caja">
+                        <span class="etiqueta-total">Planificado Total</span>
+                        <span class="valor-total neutro">650 und</span>
+                    </div>
+                    <div class="tarjeta-total-caja destacado">
+                        <span class="etiqueta-total">Producción Real</span>
+                        <span class="valor-total principal">638 und</span>
+                    </div>
+                    <div class="tarjeta-total-caja">
+                        <span class="etiqueta-total">Merma / Defectuosos</span>
+                        <span class="valor-total negativo">-12 und (1.8%)</span>
+                    </div>
+                    <div class="acciones-exportar">
+                        <button class="btn-secundario btn-exportar pdf" title="Exportar a PDF">
+                            <i class="fa-solid fa-file-pdf"></i> PDF
+                        </button>
+                        <button class="btn-secundario btn-exportar excel" title="Exportar a Excel">
+                            <i class="fa-solid fa-file-excel"></i> Excel
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Tabla de datos -->
+                <div class="contenedor-tabla-datos">
+                    <table class="tabla-estandar">
+                        <thead>
+                            <tr>
+                                <th>N° Orden</th>
+                                <th>Fecha y Hora</th>
+                                <th>Producto</th>
+                                <th class="texto-derecha">Planificado</th>
+                                <th class="texto-derecha">Real</th>
+                                <th class="texto-derecha">Variación (Merma)</th>
+                                <th class="texto-centro">Estado</th>
+                                <th class="texto-centro">Responsable</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="id-transaccion">#ORD-2026-104</td>
+                                <td>28 Oct 2026, 06:30 a.m.</td>
+                                <td>Pan artesanal</td>
+                                <td class="texto-derecha">300 und</td>
+                                <td class="texto-derecha"><strong>295 und</strong></td>
+                                <td class="texto-derecha valor-negativo">-5 und</td>
+                                <td class="texto-centro"><span class="insignia-orden finalizada">Finalizada</span></td>
+                                <td class="texto-centro">Panadero</td>
+                            </tr>
+                            <tr>
+                                <td class="id-transaccion">#ORD-2026-105</td>
+                                <td>29 Oct 2026, 06:15 a.m.</td>
+                                <td>Croissant tradicional</td>
+                                <td class="texto-derecha">200 und</td>
+                                <td class="texto-derecha"><strong>193 und</strong></td>
+                                <td class="texto-derecha valor-negativo">-7 und</td>
+                                <td class="texto-centro"><span class="insignia-orden finalizada">Finalizada</span></td>
+                                <td class="texto-centro">Panadero</td>
+                            </tr>
+                            <tr>
+                                <td class="id-transaccion">#ORD-2026-106</td>
+                                <td>30 Oct 2026, 07:00 a.m.</td>
+                                <td>Pan de bono</td>
+                                <td class="texto-derecha">150 und</td>
+                                <td class="texto-derecha">-</td>
+                                <td class="texto-derecha">-</td>
+                                <td class="texto-centro"><span class="insignia-orden proceso">En proceso</span></td>
+                                <td class="texto-centro">Panadero</td>
+                            </tr>
+                            <tr>
+                                <td class="id-transaccion">#ORD-2026-103</td>
+                                <td>27 Oct 2026, 08:00 a.m.</td>
+                                <td>Torta envinada</td>
+                                <td class="texto-derecha">20 und</td>
+                                <td class="texto-derecha">0 und</td>
+                                <td class="texto-derecha">-</td>
+                                <td class="texto-centro"><span class="insignia-orden anulada">Anulada</span></td>
+                                <td class="texto-centro">Admin</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </main>
+    <script src="js/main.js"></script>
+</body>
+
+</html>

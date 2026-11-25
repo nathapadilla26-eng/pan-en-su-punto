@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pan en su punto - Gestión de reportes</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/style.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+
+<body>
+    <nav class="menu-lateral">
+        <button id="btn-cerrar-menu" class="btn-cerrar-menu">
+            <i class="fa-solid fa-xmark"></i>
+        </button>
+        <div class="logo-contenedor">
+            <img src="img/logo.jpg" alt="Logo Pan en su punto">
+        </div>
+        <ul>
+            <li><a href="panel.html"><i class="fa-solid fa-house"></i> Inicio</a></li>
+            <li><a href="usuarios.html"><i class="fa-solid fa-users"></i> Usuarios</a></li>
+            <li><a href="inventario-inicio.html"><i class="fa-solid fa-box"></i> Inventario</a></li>
+            <li><a href="recetas-inicio.html"><i class="fa-solid fa-book"></i> Recetas</a></li>
+            <li><a href="produccion-inicio.html"><i class="fa-solid fa-fire-burner"></i> Producción</a></li>
+            <li><a href="ventas-inicio.html"><i class="fa-solid fa-cash-register"></i> Ventas</a></li>
+            <li><a href="reportes-inicio.html" class="activo"><i class="fa-solid fa-chart-line"></i> Reportes</a></li>
+            <li><a href="configuracion.html"><i class="fa-solid fa-gear"></i> Configuración</a></li>
+        </ul>
+    </nav>
+    <main class="contenido-principal">
+        <header class="barra-superior">
+            <div class="buscador">
+                <i class="fa-solid fa-magnifying-glass"></i>
+                <input type="text" placeholder="Buscar...">
+            </div>
+            <div class="iconos-usuario">
+                <i class="fa-regular fa-bell"></i>
+                <div class="avatar-usuario">A</div>
+            </div>
+        </header>
+        <!-- Contenido: Reporte de Materia Prima Próxima a Vencer -->
+        <div class="contenedor-reportes-detalle">
+
+            <!-- Cabecera -->
+            <div class="cabecera-reportes-detalle">
+                <div class="titulos-configuracion">
+                    <h2>Reporte de materia prima próxima a vencer</h2>
+                    <p>Control preventivo de caducidad para priorizar el uso de insumos en producción y evitar mermas.
+                    </p>
+                </div>
+                <div class="acciones-configuracion">
+                    <a href="reportes-inicio.html" class="btn-volver-derecha">
+                        <i class="fa-solid fa-arrow-left"></i> Volver al panel
+                    </a>
+                </div>
+            </div>
+
+            <!-- Panel de Filtros -->
+            <div class="tarjeta-filtros-reporte">
+                <form id="form-generar-reporte-vencimiento">
+                    <div class="rejilla-filtros">
+                        <div class="grupo-filtro">
+                            <label for="filtro-rango-dias">Rango de vencimiento</label>
+                            <select id="filtro-rango-dias" class="select-modal">
+                                <option value="15" selected>Próximos 15 días (Por defecto)</option>
+                                <option value="7">Próximos 7 días (Crítico)</option>
+                                <option value="30">Próximos 30 días</option>
+                                <option value="todos">Todos los lotes activos</option>
+                            </select>
+                        </div>
+                        <div class="grupo-filtro">
+                            <label for="filtro-categoria-insumo">Categoría de insumo</label>
+                            <select id="filtro-categoria-insumo" class="select-modal">
+                                <option value="todas">Todas las categorías</option>
+                                <option value="lacteos">Lácteos y Derivados</option>
+                                <option value="levaduras">Levaduras y Fermentos</option>
+                                <option value="grasas">Grasas y Aceites</option>
+                                <option value="harinas">Harinas e Insumos secos</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="acciones-filtros">
+                        <button type="submit" class="btn-principal">
+                            <i class="fa-solid fa-magnifying-glass"></i> Generar reporte
+                        </button>
+                    </div>
+                </form>
+            </div>
+
+            <!-- Resultados del Reporte (Ocultos por defecto) -->
+            <div id="resultados-reporte-vencimiento" class="oculto">
+
+                <!-- Resumen de Lotes en Riesgo -->
+                <div class="rejilla-totales-caja margin-bottom-20">
+                    <div class="tarjeta-total-caja destacado">
+                        <span class="etiqueta-total">Lotes en Alerta (≤ 15 días)</span>
+                        <span class="valor-total principal">3 lotes</span>
+                    </div>
+                    <div class="tarjeta-total-caja">
+                        <span class="etiqueta-total">Riesgo Crítico (≤ 5 días)</span>
+                        <span class="valor-total negativo">1 lote</span>
+                    </div>
+                    <div class="acciones-exportar">
+                        <button class="btn-secundario btn-exportar pdf" title="Exportar a PDF">
+                            <i class="fa-solid fa-file-pdf"></i> PDF
+                        </button>
+                        <button class="btn-secundario btn-exportar excel" title="Exportar a Excel">
+                            <i class="fa-solid fa-file-excel"></i> Excel
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Tabla de datos ordenada cronológicamente -->
+                <div class="contenedor-tabla-datos">
+                    <table class="tabla-estandar">
+                        <thead>
+                            <tr>
+                                <th>Materia Prima / Insumo</th>
+                                <th>Lote</th>
+                                <th>Categoría</th>
+                                <th class="texto-derecha">Stock Actual</th>
+                                <th class="texto-centro">Fecha Vencimiento</th>
+                                <th class="texto-derecha">Días Restantes</th>
+                                <th class="texto-centro">Estado</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="id-transaccion">Levadura fresca (Bloque 500g)</td>
+                                <td>#LOT-2026-088</td>
+                                <td>Levaduras</td>
+                                <td class="texto-derecha">2 und</td>
+                                <td class="texto-centro">03 Nov 2026</td>
+                                <td class="texto-derecha valor-negativo"><strong>4 días</strong></td>
+                                <td class="texto-centro"><span class="insignia-vencimiento critico">Crítico</span></td>
+                            </tr>
+                            <tr>
+                                <td class="id-transaccion">Leche entera pasteurizada (1L)</td>
+                                <td>#LOT-2026-092</td>
+                                <td>Lácteos</td>
+                                <td class="texto-derecha">15 und</td>
+                                <td class="texto-centro">09 Nov 2026</td>
+                                <td class="texto-derecha valor-moneda">10 días</td>
+                                <td class="texto-centro"><span class="insignia-vencimiento proximo">Por vencer</span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="id-transaccion">Mantequilla sin sal (Bloque 1kg)</td>
+                                <td>#LOT-2026-079</td>
+                                <td>Grasas</td>
+                                <td class="texto-derecha">6 und</td>
+                                <td class="texto-centro">14 Nov 2026</td>
+                                <td class="texto-derecha valor-moneda">15 días</td>
+                                <td class="texto-centro"><span class="insignia-vencimiento proximo">Por vencer</span>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+            </div>
+
+        </div>
+    </main>
+    <script src="js/main.js"></script>
+</body>
+
+</html>

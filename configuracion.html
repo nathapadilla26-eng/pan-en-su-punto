@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pan en su punto - Configuración</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/style.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+
+<body>
+    <nav class="menu-lateral">
+        <button id="btn-cerrar-menu" class="btn-cerrar-menu">
+            <i class="fa-solid fa-xmark"></i>
+        </button>
+        <div class="logo-contenedor">
+            <img src="img/logo.jpg" alt="Logo Pan en su punto">
+        </div>
+        <ul>
+            <li><a href="panel.html"><i class="fa-solid fa-house"></i> Inicio</a></li>
+            <li><a href="usuarios.html"><i class="fa-solid fa-users"></i> Usuarios</a></li>
+            <li><a href="inventario-inicio.html"><i class="fa-solid fa-box"></i> Inventario</a></li>
+            <li><a href="recetas-inicio.html"><i class="fa-solid fa-book"></i> Recetas</a></li>
+            <li><a href="produccion-inicio.html"><i class="fa-solid fa-fire-burner"></i> Producción</a></li>
+            <li><a href="ventas-inicio.html"><i class="fa-solid fa-cash-register"></i> Ventas</a></li>
+            <li><a href="reportes-inicio.html"><i class="fa-solid fa-chart-line"></i> Reportes</a></li>
+            <li><a href="configuracion.html" class="activo"><i class="fa-solid fa-gear"></i> Configuración</a></li>
+        </ul>
+    </nav>
+    <main class="contenido-principal">
+        <header class="barra-superior">
+            <div class="buscador">
+                <i class="fa-solid fa-magnifying-glass"></i>
+                <input type="text" placeholder="Buscar...">
+            </div>
+            <div class="iconos-usuario">
+                <i class="fa-regular fa-bell"></i>
+                <!-- Contenedor del avatar con su menú desplegable -->
+            <div class="contenedor-perfil-cabecera">
+                <button type="button" class="btn-avatar-usuario" id="btn-avatar-usuario" aria-expanded="false" aria-haspopup="true">
+                    <span>A</span>
+                </button>
+
+                <!-- Menú flotante -->
+                <div id="dropdown-menu-usuario" class="dropdown-usuario oculto" role="menu">
+                    <div class="encabezado-dropdown-usuario">
+                        <p class="nombre-usuario-sesion">Nathalia García</p>
+                        <span class="insignia-rol admin">Administrador</span>
+                    </div>
+                    <hr class="separador-dropdown">
+                    <ul class="lista-opciones-dropdown">
+                        <li>
+                            <a href="actualizar-contraseña.html" class="opcion-dropdown" role="menuitem">
+                                <i class="fa-solid fa-key"></i>
+                                <span>Cambiar contraseña</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="index.html" class="opcion-dropdown salir" role="menuitem">
+                                <i class="fa-solid fa-arrow-right-from-bracket"></i>
+                                <span>Cerrar sesión</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            </div>
+        </header>
+        <!-- Contenido: Configuración del Sistema -->
+        <div class="contenedor-configuracion-general">
+
+            <!-- Cabecera simétrica de ancho completo -->
+            <div class="cabecera-reportes-detalle">
+                <div class="titulos-configuracion">
+                    <h2>Configuración del sistema</h2>
+                    <p>Administra los parámetros generales, facturación y seguridad de la plataforma.</p>
+                </div>
+            </div>
+
+            <!-- 1. Tarjeta: Datos de la empresa (Impresión en facturas) -->
+            <div class="tarjeta-configuracion-modulo">
+                <h3>Datos de la empresa (Impresión en facturas)</h3>
+
+                <form id="form-datos-empresa" class="rejilla-empresa-contenedor">
+                    <!-- Subir logo -->
+                    <div class="contenedor-subir-logo">
+                        <div class="circulo-logo-preview" id="preview-logo">
+                            <i class="fa-solid fa-camera"></i>
+                            <span>Subir logo</span>
+                        </div>
+                        <label for="input-archivo-logo" class="btn-enlace-logo">Cambiar imagen</label>
+                        <input type="file" id="input-archivo-logo" accept="image/*" class="oculto">
+                    </div>
+
+                    <!-- Campos de texto -->
+                    <div class="campos-empresa-formulario">
+                        <div class="fila-campos-doble">
+                            <div class="grupo-campo-config">
+                                <label for="nombre-comercial">Nombre comercial</label>
+                                <input type="text" id="nombre-comercial" value="Pan en su punto" required>
+                            </div>
+                            <div class="grupo-campo-config">
+                                <label for="nit-documento">NIT / Documento</label>
+                                <input type="text" id="nit-documento" value="901.234.567-8" required>
+                            </div>
+                        </div>
+                        <div class="fila-campos-doble">
+                            <div class="grupo-campo-config">
+                                <label for="direccion-empresa">Dirección</label>
+                                <input type="text" id="direccion-empresa" value="Calle Principal 123" required>
+                            </div>
+                            <div class="grupo-campo-config">
+                                <label for="telefono-empresa">Teléfono</label>
+                                <input type="text" id="telefono-empresa" value="+57 300 123 4567" required>
+                            </div>
+                        </div>
+                        <div class="alinear-boton-derecha">
+                            <button type="submit" class="btn-principal">Guardar datos</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+
+            <!-- Fila central: 2 Columnas -->
+            <div class="rejilla-configuracion-doble">
+
+                <!-- 2. Preferencias de facturación y recibos -->
+                <div class="tarjeta-configuracion-modulo">
+                    <h3>Preferencias de facturación y recibos</h3>
+                    <form id="form-preferencias-recibo">
+                        <div class="grupo-campo-config">
+                            <label for="mensaje-pie-recibo">Mensaje de pie de página del recibo</label>
+                            <textarea id="mensaje-pie-recibo"
+                                rows="4">¡Gracias por su compra! Las devoluciones se aceptan en un plazo máximo de 2 horas presentando este recibo original.</textarea>
+                        </div>
+
+                        <div class="grupo-campo-config">
+                            <label for="dias-alerta-vencimiento">Anticipación de alertas de caducidad (días)</label>
+                            <input type="number" id="dias-alerta-vencimiento" value="15" min="1" max="60" required>
+                        </div>
+
+                        <div class="pie-tarjeta-facturacion">
+                            <a href="configuracion-impuestos.html" class="enlace-naranja-config">
+                                Configuración de impuestos <i class="fa-solid fa-arrow-right"></i>
+                            </a>
+                            <button type="submit" class="btn-secundario">Guardar</button>
+                        </div>
+                    </form>
+                </div>
+
+                <!-- 3. Configuración de notificaciones -->
+                <div class="tarjeta-configuracion-modulo">
+                    <h3>Configuración de notificaciones</h3>
+
+                    <div class="lista-opciones-notificacion">
+                        <div class="item-notificacion">
+                            <span>Alerta de stock crítico en inventario</span>
+                            <label class="interruptor-switch">
+                                <input type="checkbox" id="check-stock-critico" checked>
+                                <span class="deslizador-switch"></span>
+                            </label>
+                        </div>
+
+                        <div class="item-notificacion">
+                            <span>Alerta de materias primas próximas a vencer</span>
+                            <label class="interruptor-switch">
+                                <input type="checkbox" id="check-alerta-vencer" checked>
+                                <span class="deslizador-switch"></span>
+                            </label>
+                        </div>
+
+                        <div class="item-notificacion">
+                            <span>Notificación por anulación de ventas en caja</span>
+                            <label class="interruptor-switch">
+                                <input type="checkbox" id="check-alerta-anulacion">
+                                <span class="deslizador-switch"></span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 4. Tarjeta: Mantenimiento y seguridad -->
+            <div class="tarjeta-configuracion-modulo tarjeta-mantenimiento">
+                <div class="info-mantenimiento-texto">
+                    <div class="icono-seguridad-backup">
+                        <i class="fa-solid fa-shield-halved"></i>
+                    </div>
+                    <div>
+                        <h4>Mantenimiento y seguridad</h4>
+                        <p>Genera un respaldo completo de la base de datos (usuarios, inventario, ventas y recetas).
+                            Última copia: Hace 2 días.</p>
+                    </div>
+                </div>
+                <button type="button" id="btn-generar-backup" class="btn-principal btn-backup">
+                    <i class="fa-solid fa-download"></i> Generar copia de seguridad (Backup)
+                </button>
+            </div>
+        </div>
+    </main>
+    <script src="js/main.js"></script>
+    <!-- Modal: Éxito de Copia de Seguridad -->
+    <div id="modal-backup-exito" class="capa-modal oculto" role="dialog" aria-modal="true" aria-labelledby="titulo-modal-backup">
+        <div class="tarjeta-modal-notificacion">
+            <div class="icono-modal-exito">
+                <i class="fa-solid fa-circle-check"></i>
+            </div>
+            <h3 id="titulo-modal-backup">¡Copia de seguridad generada!</h3>
+            <p>El respaldo del sistema se ha completado y empaquetado de manera satisfactoria.</p>
+
+            <div class="caja-resumen-backup">
+                <div class="fila-resumen-backup">
+                    <span class="etiqueta-resumen-backup">Archivo generado:</span>
+                    <strong class="valor-resumen-backup" id="texto-nombre-backup">backup_pan_en_su_punto.sql</strong>
+                </div>
+                <div class="fila-resumen-backup">
+                    <span class="etiqueta-resumen-backup">Fecha y hora:</span>
+                    <span class="valor-resumen-backup" id="texto-fecha-backup">30 Oct 2026, 01:00 p.m.</span>
+                </div>
+                <div class="fila-resumen-backup">
+                    <span class="etiqueta-resumen-backup">Tablas incluidas:</span>
+                    <span class="valor-resumen-backup">Usuarios, Inventario, Recetas, Ventas, Reportes</span>
+                </div>
+                <div class="fila-resumen-backup">
+                    <span class="etiqueta-resumen-backup">Estado:</span>
+                    <span class="insignia-backup-completado">Verificado</span>
+                </div>
+            </div>
+
+            <div class="acciones-modal-notificacion">
+                <button type="button" id="btn-cerrar-modal-backup" class="btn-principal">
+                    Entendido
+                </button>
+            </div>
+        </div>
+    </div>
+    <!-- Modal: Éxito al Guardar Configuración -->
+    <div id="modal-guardar-exito" class="capa-modal oculto" role="dialog" aria-modal="true" aria-labelledby="titulo-modal-guardar">
+        <div class="tarjeta-modal-notificacion">
+            <div class="icono-modal-exito">
+                <i class="fa-solid fa-circle-check"></i>
+            </div>
+            <h3 id="titulo-modal-guardar">¡Configuración guardada!</h3>
+            <p id="mensaje-modal-guardar">Los parámetros han sido actualizados exitosamente en el sistema.</p>
+            <div class="acciones-modal-notificacion">
+                <button type="button" id="btn-cerrar-modal-guardar" class="btn-principal">
+                    Entendido
+                </button>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pan en su punto - Gestión de reportes</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/style.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+
+<body>
+    <nav class="menu-lateral">
+        <button id="btn-cerrar-menu" class="btn-cerrar-menu">
+            <i class="fa-solid fa-xmark"></i>
+        </button>
+        <div class="logo-contenedor">
+            <img src="img/logo.jpg" alt="Logo Pan en su punto">
+        </div>
+        <ul>
+            <li><a href="panel.html"><i class="fa-solid fa-house"></i> Inicio</a></li>
+            <li><a href="usuarios.html"><i class="fa-solid fa-users"></i> Usuarios</a></li>
+            <li><a href="inventario-inicio.html"><i class="fa-solid fa-box"></i> Inventario</a></li>
+            <li><a href="recetas-inicio.html"><i class="fa-solid fa-book"></i> Recetas</a></li>
+            <li><a href="produccion-inicio.html"><i class="fa-solid fa-fire-burner"></i> Producción</a></li>
+            <li><a href="ventas-inicio.html"><i class="fa-solid fa-cash-register"></i> Ventas</a></li>
+            <li><a href="reportes-inicio.html" class="activo"><i class="fa-solid fa-chart-line"></i> Reportes</a></li>
+            <li><a href="configuracion.html"><i class="fa-solid fa-gear"></i> Configuración</a></li>
+        </ul>
+    </nav>
+    <main class="contenido-principal">
+        <header class="barra-superior">
+            <div class="buscador">
+                <i class="fa-solid fa-magnifying-glass"></i>
+                <input type="text" placeholder="Buscar...">
+            </div>
+            <div class="iconos-usuario">
+                <i class="fa-regular fa-bell"></i>
+                <div class="avatar-usuario">A</div>
+            </div>
+        </header>
+       <!-- Contenido: Reporte de Ventas -->
+            <div class="contenedor-reportes-detalle">
+                
+                <!-- Cabecera -->
+                <div class="cabecera-reportes-detalle">
+                    <div class="titulos-configuracion">
+                        <h2>Reporte de ventas</h2>
+                        <p>Analiza los ingresos y el volumen de facturación según los filtros aplicados.</p>
+                    </div>
+                    <div class="acciones-configuracion">
+                        <a href="reportes-inicio.html" class="btn-volver-derecha">
+                            <i class="fa-solid fa-arrow-left"></i> Volver al panel
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Panel de Filtros -->
+                <div class="tarjeta-filtros-reporte">
+                    <form id="form-generar-reporte-ventas">
+                        <div class="rejilla-filtros">
+                            <div class="grupo-filtro">
+                                <label for="filtro-fecha-inicio">Fecha inicial</label>
+                                <input type="date" id="filtro-fecha-inicio" class="input-texto-modal" required>
+                            </div>
+                            <div class="grupo-filtro">
+                                <label for="filtro-fecha-fin">Fecha final</label>
+                                <input type="date" id="filtro-fecha-fin" class="input-texto-modal" required>
+                            </div>
+                            <div class="grupo-filtro">
+                                <label for="filtro-cajero">Cajero</label>
+                                <select id="filtro-cajero" class="select-modal">
+                                    <option value="todos">Todos los cajeros</option>
+                                    <option value="cajero1">Carlos Mendoza</option>
+                                    <option value="cajero2">Ana Torres</option>
+                                </select>
+                            </div>
+                            <div class="grupo-filtro">
+                                <label for="filtro-pago">Método de pago</label>
+                                <select id="filtro-pago" class="select-modal">
+                                    <option value="todos">Todos los métodos</option>
+                                    <option value="efectivo">Efectivo</option>
+                                    <option value="tarjeta">Tarjeta</option>
+                                    <option value="transferencia">Transferencia</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="acciones-filtros">
+                            <button type="submit" class="btn-principal">
+                                <i class="fa-solid fa-magnifying-glass"></i> Generar reporte
+                            </button>
+                        </div>
+                    </form>
+                </div>
+
+                <!-- Resultados del Reporte (Ocultos por defecto hasta generar) -->
+                <div id="resultados-reporte-ventas" class="oculto">
+                    
+                    <!-- Resumen financiero -->
+                    <div class="rejilla-totales-caja margin-bottom-20">
+                        <div class="tarjeta-total-caja destacado">
+                            <span class="etiqueta-total">Total de Ingresos</span>
+                            <span class="valor-total principal">$1.250.000</span>
+                        </div>
+                        <div class="tarjeta-total-caja">
+                            <span class="etiqueta-total">Transacciones Totales</span>
+                            <span class="valor-total neutro">42 ventas</span>
+                        </div>
+                        <div class="acciones-exportar">
+                            <button class="btn-secundario btn-exportar pdf" title="Exportar a PDF">
+                                <i class="fa-solid fa-file-pdf"></i> PDF
+                            </button>
+                            <button class="btn-secundario btn-exportar excel" title="Exportar a Excel">
+                                <i class="fa-solid fa-file-excel"></i> Excel
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Tabla de datos -->
+                    <div class="contenedor-tabla-datos">
+                        <table class="tabla-estandar">
+                            <thead>
+                                <tr>
+                                    <th>Fecha y Hora</th>
+                                    <th>Factura</th>
+                                    <th>Vendedor</th>
+                                    <th>Productos</th>
+                                    <th>Método</th>
+                                    <th class="texto-derecha">Total</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>30 Oct 2026, 08:30 a.m.</td>
+                                    <td class="id-transaccion">#trx-4540</td>
+                                    <td>Carlos Mendoza</td>
+                                    <td>2x Pan artesanal, 1x Café</td>
+                                    <td><span class="insignia-estado emitido">Efectivo</span></td>
+                                    <td class="texto-derecha valor-moneda">$8.500</td>
+                                </tr>
+                                <tr>
+                                    <td>30 Oct 2026, 09:15 a.m.</td>
+                                    <td class="id-transaccion">#trx-4541</td>
+                                    <td>Ana Torres</td>
+                                    <td>1x Torta envinada</td>
+                                    <td><span class="insignia-estado">Tarjeta</span></td>
+                                    <td class="texto-derecha valor-moneda">$4.500</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                </div>
+
+            </div>
+    </main>
+    <script src="js/main.js"></script>
+</body>
+
+</html>

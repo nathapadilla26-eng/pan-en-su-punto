@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pan en su punto - Gestión de recetas</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/style.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+
+<body>
+    <nav class="menu-lateral">
+        <button id="btn-cerrar-menu" class="btn-cerrar-menu">
+            <i class="fa-solid fa-xmark"></i>
+        </button>
+        <div class="logo-contenedor">
+            <img src="img/logo.jpg" alt="Logo Pan en su punto">
+        </div>
+        <ul>
+            <li><a href="panel.html"><i class="fa-solid fa-house"></i> Inicio</a></li>
+            <li><a href="usuarios.html"><i class="fa-solid fa-users"></i> Usuarios</a></li>
+            <li><a href="inventario-inicio.html"><i class="fa-solid fa-box"></i> Inventario</a></li>
+            <li><a href="recetas-inicio.html" class="activo"><i class="fa-solid fa-book"></i> Recetas</a></li>
+            <li><a href="produccion-inicio.html"><i class="fa-solid fa-fire-burner"></i> Producción</a></li>
+            <li><a href="ventas-inicio.html"><i class="fa-solid fa-cash-register"></i> Ventas</a></li>
+            <li><a href="reportes-inicio.html"><i class="fa-solid fa-chart-line"></i> Reportes</a></li>
+            <li><a href="configuracion.html"><i class="fa-solid fa-gear"></i> Configuración</a></li>
+        </ul>
+    </nav>
+    <main class="contenido-principal">
+        <header class="barra-superior">
+            <div class="buscador">
+                <i class="fa-solid fa-magnifying-glass"></i>
+                <input type="text" placeholder="Buscar...">
+            </div>
+            <div class="iconos-usuario">
+                <i class="fa-regular fa-bell"></i>
+                <div class="avatar-usuario">A</div>
+            </div>
+        </header>
+
+        <main class="contenido-principal">
+        <div class="encabezado-seccion">
+            <div>
+                <h2>Gestión de recetas</h2>
+                <p>Administra las fórmulas estandarizadas y su estado para el área de producción.</p>
+            </div>
+            <a href="nueva-receta.html" class="btn-principal"><i class="fa-solid fa-plus"></i> Nueva receta</a>
+        </div>
+
+        <div class="tarjeta-datos">
+            <table class="tabla-datos">
+                <thead>
+                    <tr>
+                        <th>Código</th>
+                        <th>Nombre de la receta</th>
+                        <th>Producto vinculado</th>
+                        <th>Rendimiento</th>
+                        <th>Costo unitario</th>
+                        <th>Estado</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>R-001</td>
+                        <td>Masa madre tradicional</td>
+                        <td>Pan aliñado</td>
+                        <td>20 und</td>
+                        <td>$ 450</td>
+                        <td><span class="estado-activo">Activa</span></td>
+                        <td>
+                            <a href="editar-receta.html" class="btn-icono title="Editar"><i class="fa-solid fa-pen"></i></a>
+                            <a href="#" class="btn-icono btn-estado-receta" title="Cambiar estado"><i class="fa-solid fa-power-off"></i></a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>R-014</td>
+                        <td>Croissant francés</td>
+                        <td>Croissant de mantequilla</td>
+                        <td>12 und</td>
+                        <td>$ 1.200</td>
+                        <td><span class="estado-inactivo">Inactiva</span></td>
+                        <td>
+                            <a href="editar-receta.html" class="btn-icono title="Editar"><i class="fa-solid fa-pen"></i></a>
+                            <a href="#" class="btn-icono btn-estado-receta" title="Cambiar estado"><i class="fa-solid fa-power-off"></i></a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div class="paginacion-tabla">
+                <button type="button" class="btn-pagina activo">1</button>
+                <button type="button" class="btn-pagina">2</button>
+                <button type="button" class="btn-pagina">&gt;</button>
+            </div>
+        </div>
+
+        <!-- Modal de Confirmación de Estado -->
+        <div id="modal-estado-receta" class="fondo-modal oculto">
+            <div class="contenido-modal centrado">
+                <div class="icono-peligro" id="modal-estado-icono">
+                    <i class="fa-solid fa-power-off"></i>
+                </div>
+                <h3 id="modal-estado-titulo">¿Inactivar receta?</h3>
+                <p id="modal-estado-mensaje">Si inactivas esta receta, los panaderos no podrán utilizarla para crear nuevas órdenes de producción.</p>
+                <div class="acciones-modal">
+                    <button type="button" id="btn-cancelar-estado" class="btn-secundario">Cancelar</button>
+                    <button type="button" id="btn-confirmar-estado" class="btn-principal">Inactivar</button>
+                </div>
+            </div>
+        </div>
+    </main>
+    <script src="js/main.js"></script>
+</body>
+
+</html>

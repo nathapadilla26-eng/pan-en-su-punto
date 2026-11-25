@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pan en su punto - Gestión de inventarios</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/style.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+
+<body>
+    <nav class="menu-lateral">
+        <button id="btn-cerrar-menu" class="btn-cerrar-menu">
+            <i class="fa-solid fa-xmark"></i>
+        </button>
+        <div class="logo-contenedor">
+            <img src="img/logo.jpg" alt="Logo Pan en su punto">
+        </div>
+        <ul>
+            <li><a href="panel.html"><i class="fa-solid fa-house"></i> Inicio</a></li>
+            <li><a href="usuarios.html"><i class="fa-solid fa-users"></i> Usuarios</a></li>
+            <li><a href="inventario-inicio.html" class="activo"><i class="fa-solid fa-box"></i> Inventario</a></li>
+            <li><a href="recetas-inicio.html"><i class="fa-solid fa-book"></i> Recetas</a></li>
+            <li><a href="produccion-inicio.html"><i class="fa-solid fa-fire-burner"></i> Producción</a></li>
+            <li><a href="ventas-inicio.html"><i class="fa-solid fa-cash-register"></i> Ventas</a></li>
+            <li><a href="reportes-inicio.html"><i class="fa-solid fa-chart-line"></i> Reportes</a></li>
+            <li><a href="configuracion.html"><i class="fa-solid fa-gear"></i> Configuración</a></li>
+        </ul>
+    </nav>
+    <main class="contenido-principal">
+        <header class="barra-superior">
+            <div class="buscador">
+                <i class="fa-solid fa-magnifying-glass"></i>
+                <input type="text" placeholder="Buscar...">
+            </div>
+            <div class="iconos-usuario">
+                <i class="fa-regular fa-bell"></i>
+                <!-- Contenedor del avatar con su menú desplegable -->
+            <div class="contenedor-perfil-cabecera">
+                <button type="button" class="btn-avatar-usuario" id="btn-avatar-usuario" aria-expanded="false" aria-haspopup="true">
+                    <span>A</span>
+                </button>
+
+                <!-- Menú flotante -->
+                <div id="dropdown-menu-usuario" class="dropdown-usuario oculto" role="menu">
+                    <div class="encabezado-dropdown-usuario">
+                        <p class="nombre-usuario-sesion">Nathalia García</p>
+                        <span class="insignia-rol admin">Administrador</span>
+                    </div>
+                    <hr class="separador-dropdown">
+                    <ul class="lista-opciones-dropdown">
+                        <li>
+                            <a href="actualizar-contraseña.html" class="opcion-dropdown" role="menuitem">
+                                <i class="fa-solid fa-key"></i>
+                                <span>Cambiar contraseña</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="index.html" class="opcion-dropdown salir" role="menuitem">
+                                <i class="fa-solid fa-arrow-right-from-bracket"></i>
+                                <span>Cerrar sesión</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            </div>
+        </header>
+        <div class="encabezado-seccion">
+            <h2>Gestión de Inventario</h2>
+            <p class="descripcion-seccion">Controla el stock, gestiona proveedores y registra los movimientos de bodega.</p>
+        </div>
+
+        <div class="kpi-container">
+    <div class="kpi-card kpi-valor">
+        <p class="kpi-titulo">VALOR DEL INVENTARIO</p>
+        <h3>$12.450.000 COP</h3>
+        <p class="kpi-detalle exito"><i class="fa-solid fa-arrow-trend-up"></i> +4.2% vs. mes anterior</p>
+    </div>
+    <a href="alertas-stock-minimo.html" class="kpi-card kpi-alerta">
+        <p class="kpi-titulo">ALERTAS DE STOCK</p>
+        <h3>3 insumos</h3>
+        <p class="kpi-detalle peligro"><i class="fa-solid fa-circle-exclamation"></i> Nivel crítico</p>
+    </a>
+    <a href="mermas.html" class="kpi-card kpi-normal">
+        <p class="kpi-titulo">MERMAS DEL MES</p>
+        <h3>12 kg</h3>
+        <p class="kpi-detalle">Dentro del rango estimado (< 2%)</p>
+    </a>
+</div>
+
+        <div class="modulos-grid">
+            <a href="materias-primas.html" class="modulo-card">
+                <div class="icono-modulo"><i class="fa-solid fa-wheat-awn"></i></div>
+                <h4>Materias Primas</h4>
+                <p>Control de insumos básicos e ingredientes.</p>
+                <span class="enlace-texto">Gestionar stock <i class="fa-solid fa-arrow-right"></i></span>
+            </a>
+            <a href="productos-terminados.html" class="modulo-card">
+                <div class="icono-modulo"><i class="fa-solid fa-bread-slice"></i></div>
+                <h4>Productos Terminados</h4>
+                <p>Inventario de panadería y repostería lista para venta.</p>
+                <span class="enlace-texto">Ver vitrina <i class="fa-solid fa-arrow-right"></i></span>
+            </a>
+            <a href="proveedores.html" class="modulo-card">
+                <div class="icono-modulo"><i class="fa-solid fa-truck-fast"></i></div>
+                <h4>Proveedores</h4>
+                <p>Directorio de contactos y gestión de compras.</p>
+                <span class="enlace-texto">Ver directorio <i class="fa-solid fa-arrow-right"></i></span>
+            </a>
+            <a href="entradas-inventario.html" class="modulo-card">
+                <div class="icono-modulo"><i class="fa-solid fa-box-open"></i></div>
+                <h4>Entradas de Inventario</h4>
+                <p>Registro de ingresos a bodega y facturas.</p>
+                <span class="enlace-texto">Registrar entrada <i class="fa-solid fa-arrow-right"></i></span>
+            </a>
+            <a href="mermas.html" class="modulo-card">
+                <div class="icono-modulo"><i class="fa-solid fa-trash-can"></i></div>
+                <h4>Registro de Mermas</h4>
+                <p>Control de desperdicios, caducidad y pérdidas.</p>
+                <span class="enlace-texto">Registrar merma <i class="fa-solid fa-arrow-right"></i></span>
+            </a>
+        </div>
+    </main>
+    <script src="js/main.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pan en su punto - Gestión de ventas</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/style.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+
+<body>
+    <nav class="menu-lateral">
+        <button id="btn-cerrar-menu" class="btn-cerrar-menu">
+            <i class="fa-solid fa-xmark"></i>
+        </button>
+        <div class="logo-contenedor">
+            <img src="img/logo.jpg" alt="Logo Pan en su punto">
+        </div>
+        <ul>
+            <li><a href="panel.html"><i class="fa-solid fa-house"></i> Inicio</a></li>
+            <li><a href="usuarios.html"><i class="fa-solid fa-users"></i> Usuarios</a></li>
+            <li><a href="inventario-inicio.html"><i class="fa-solid fa-box"></i> Inventario</a></li>
+            <li><a href="recetas-inicio.html"><i class="fa-solid fa-book"></i> Recetas</a></li>
+            <li><a href="produccion-inicio.html"><i class="fa-solid fa-fire-burner"></i> Producción</a></li>
+            <li><a href="ventas-inicio.html" class="activo"><i class="fa-solid fa-cash-register"></i> Ventas</a></li>
+            <li><a href="reportes.inicio.html"><i class="fa-solid fa-chart-line"></i> Reportes</a></li>
+            <li><a href="configuracion.html"><i class="fa-solid fa-gear"></i> Configuración</a></li>
+        </ul>
+    </nav>
+    <main class="contenido-principal">
+        <header class="barra-superior">
+            <div class="buscador">
+                <i class="fa-solid fa-magnifying-glass"></i>
+                <input type="text" placeholder="Buscar...">
+            </div>
+            <div class="iconos-usuario">
+                <i class="fa-regular fa-bell"></i>
+                <div class="avatar-usuario">A</div>
+            </div>
+        </header>
+        <!-- Contenido: Configuración de Impuestos -->
+        <div class="contenedor-configuracion">
+
+            <!-- Cabecera -->
+            <!-- Cabecera -->
+                <div class="cabecera-configuracion">
+                    <div class="titulos-configuracion">
+                        <h2>Configuración de impuestos</h2>
+                        <p>Administra los porcentajes y la activación aplicables al sistema POS.</p>
+                    </div>
+                    <div class="acciones-configuracion">
+                        <a href="ventas-inicio.html" class="btn-volver-derecha">
+                            <i class="fa-solid fa-arrow-left"></i> Volver al panel
+                        </a>
+                    </div>
+                </div>
+
+            <!-- Tarjeta de formulario de impuestos -->
+            <div class="tarjeta-configuracion">
+                <h3 class="titulo-tarjeta-config">Impuesto principal de ventas</h3>
+                <hr class="divisor-config">
+
+                <form id="form-config-impuestos">
+                    <div class="rejilla-formularios-config">
+
+                        <div class="grupo-campo-modal">
+                            <label for="input-nombre-impuesto">Nombre del impuesto</label>
+                            <input type="text" id="input-nombre-impuesto" class="input-texto-modal" value="Impoconsumo"
+                                required>
+                        </div>
+
+                        <div class="grupo-campo-modal">
+                            <label for="input-porcentaje-impuesto">Porcentaje a aplicar</label>
+                            <div class="input-con-sufijo">
+                                <input type="number" id="input-porcentaje-impuesto" value="8" min="0" step="0.1"
+                                    required>
+                                <span class="sufijo-input">%</span>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="grupo-estado-impuesto">
+                        <label class="switch-personalizado">
+                            <input type="checkbox" id="toggle-estado-impuesto" checked>
+                            <span class="slider-switch redondear"></span>
+                        </label>
+                        <div class="textos-estado-switch">
+                            <span class="etiqueta-estado-principal">Aplicar impuesto automáticamente</span>
+                            <span class="etiqueta-estado-secundaria">Si está inactivo, las ventas se cobrarán con 0% de
+                                impuesto.</span>
+                        </div>
+                    </div>
+
+                    <div class="acciones-formulario-config">
+                        <button type="submit" class="btn-principal" id="btn-guardar-impuestos">Guardar
+                            configuración</button>
+                    </div>
+                </form>
+            </div>
+
+            <!-- Modal: Éxito al guardar configuración -->
+            <div id="modal-exito-config" class="modal oculto">
+                <div class="modal-exito-contenedor">
+                    <div class="icono-exito">
+                        <i class="fa-solid fa-circle-check"></i>
+                    </div>
+                    <h3>¡Configuración guardada!</h3>
+                    <p>Los parámetros de impuestos se han actualizado correctamente en el sistema.</p>
+                </div>
+            </div>
+
+        </div>
+    </main>
+    <script src="js/main.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pan en su punto - Gestión de recetas</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/style.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+
+<body>
+    <nav class="menu-lateral">
+        <button id="btn-cerrar-menu" class="btn-cerrar-menu">
+            <i class="fa-solid fa-xmark"></i>
+        </button>
+        <div class="logo-contenedor">
+            <img src="img/logo.jpg" alt="Logo Pan en su punto">
+        </div>
+        <ul>
+            <li><a href="panel.html"><i class="fa-solid fa-house"></i> Inicio</a></li>
+            <li><a href="usuarios.html"><i class="fa-solid fa-users"></i> Usuarios</a></li>
+            <li><a href="inventario-inicio.html"><i class="fa-solid fa-box"></i> Inventario</a></li>
+            <li><a href="recetas-inicio.html" class="activo"><i class="fa-solid fa-book"></i> Recetas</a></li>
+            <li><a href="produccion-inicio.html"><i class="fa-solid fa-fire-burner"></i> Producción</a></li>
+            <li><a href="ventas-inicio.html"><i class="fa-solid fa-cash-register"></i> Ventas</a></li>
+            <li><a href="reportes-inicio.html"><i class="fa-solid fa-chart-line"></i> Reportes</a></li>
+            <li><a href="configuracion.html"><i class="fa-solid fa-gear"></i> Configuración</a></li>
+        </ul>
+    </nav>
+    <main class="contenido-principal">
+        <header class="barra-superior">
+            <div class="buscador">
+                <i class="fa-solid fa-magnifying-glass"></i>
+                <input type="text" placeholder="Buscar...">
+            </div>
+            <div class="iconos-usuario">
+                <i class="fa-regular fa-bell"></i>
+                <div class="avatar-usuario">A</div>
+            </div>
+        </header>
+
+        <main class="contenido-principal">
+        <div class="encabezado-seccion">
+            <div>
+                <h2>Editar receta</h2>
+                <p>Modifica la formulación técnica, ingredientes o rendimiento de la receta.</p>
+            </div>
+            <a href="recetas.html" class="btn-principal"><i class="fa-solid fa-arrow-left"></i> Volver a recetas</a>
+        </div>
+
+        <div class="tarjeta-formulario">
+            <form id="form-editar-receta">
+                <h3>Datos generales</h3>
+                <div class="formulario-cuadricula">
+                    <div class="grupo-input">
+                        <label for="codigo-receta">Código de receta <span class="requerido">*</span></label>
+                        <input type="text" id="codigo-receta" value="R-001" readonly class="input-bloqueado">
+                    </div>
+                    <div class="grupo-input">
+                        <label for="nombre-receta">Nombre de la receta <span class="requerido">*</span></label>
+                        <input type="text" id="nombre-receta" value="Masa madre tradicional" required>
+                    </div>
+                    <div class="grupo-input">
+                        <label for="producto-vinculado">Producto terminado vinculado <span class="requerido">*</span></label>
+                        <select id="producto-vinculado" required>
+                            <option value="PT-001" selected>Pan Aliñado Tradicional</option>
+                            <option value="PT-002">Croissant de Mantequilla</option>
+                            <option value="PT-003">Pan Francés</option>
+                        </select>
+                    </div>
+                    <div class="grupo-input">
+                        <label for="rendimiento">Rendimiento (unidades) <span class="requerido">*</span></label>
+                        <input type="number" id="rendimiento" value="20" required>
+                    </div>
+                    <div class="grupo-input">
+                        <label for="tiempo-prep">Tiempo de preparación (minutos)</label>
+                        <input type="number" id="tiempo-prep" value="120">
+                    </div>
+                    <div class="grupo-input">
+                        <label for="estado-receta">Estado de la receta <span class="requerido">*</span></label>
+                        <select id="estado-receta" required>
+                            <option value="activo" selected>Activa</option>
+                            <option value="inactivo">Inactiva</option>
+                        </select>
+                    </div>
+                </div>
+
+                <h3>Ingredientes requeridos</h3>
+                <div class="contenedor-tabla-formulario">
+                    <table class="tabla-datos">
+                        <thead>
+                            <tr>
+                                <th>Materia prima</th>
+                                <th>Cantidad</th>
+                                <th>Unidad</th>
+                                <th>Costo estimado</th>
+                                <th>Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody id="lista-ingredientes">
+                            <tr>
+                                <td>Harina de trigo especial</td>
+                                <td>1000</td>
+                                <td>g</td>
+                                <td>$ 2.400</td>
+                                <td>
+                                    <button type="button" class="btn-icono btn-eliminar-fila" title="Quitar ingrediente"><i class="fa-solid fa-trash"></i></button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Mantequilla repostera</td>
+                                <td>250</td>
+                                <td>g</td>
+                                <td>$ 3.800</td>
+                                <td>
+                                    <button type="button" class="btn-icono btn-eliminar-fila" title="Quitar ingrediente"><i class="fa-solid fa-trash"></i></button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Levadura seca</td>
+                                <td>30</td>
+                                <td>g</td>
+                                <td>$ 900</td>
+                                <td>
+                                    <button type="button" class="btn-icono btn-eliminar-fila" title="Quitar ingrediente"><i class="fa-solid fa-trash"></i></button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <button type="button" id="btn-agregar-ingrediente" class="btn-secundario"><i class="fa-solid fa-plus"></i> Agregar ingrediente</button>
+                </div>
+
+                <h3>Instrucciones de preparación</h3>
+                <div class="formulario-cuadricula">
+                    <div class="grupo-input">
+                        <label for="temp-horneado">Temperatura de horneado (°C)</label>
+                        <input type="number" id="temp-horneado" value="180">
+                    </div>
+                    <div class="grupo-input">
+                        <label for="tiempo-horneado">Tiempo de horneado (minutos)</label>
+                        <input type="number" id="tiempo-horneado" value="25">
+                    </div>
+                </div>
+
+                <div class="grupo-input ancho-completo">
+                    <label for="paso-a-paso">Paso a paso detallado <span class="requerido">*</span></label>
+                    <textarea id="paso-a-paso" rows="4" required>1. Mezclar harina y levadura con agua tibia durante 10 minutos.
+2. Incorporar la mantequilla en punto pomada hasta lograr elasticidad completa.
+3. Fermentar durante 90 minutos a temperatura ambiente antes del porcionado.</textarea>
+                </div>
+
+                <div class="acciones-formulario">
+                    <a href="gestion-recetas.html" class="btn-secundario">Cancelar</a>
+                    <button type="button" id="btn-actualizar-receta" class="btn-principal">Actualizar receta</button>
+                </div>
+            </form>
+        </div>
+
+        <!-- Modal de Éxito al Actualizar -->
+        <div id="modal-exito-receta" class="fondo-modal oculto">
+            <div class="contenido-modal centrado">
+                <div class="icono-exito">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-linecap="round" stroke-linejoin="round">
+                        <polyline points="20 6 9 17 4 12"></polyline>
+                    </svg>
+                </div>
+                <h3>¡Receta actualizada con éxito!</h3>
+                <p>Los cambios en la fórmula y el rendimiento se guardaron correctamente en el sistema.</p>
+                <a href="gestion-recetas.html" class="btn-principal boton-ancho">Aceptar</a>
+            </div>
+        </div>
+    </main>
+    </main>
+    <script src="js/main.js"></script>
+</body>
+
+</html>

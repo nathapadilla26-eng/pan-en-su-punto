@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pan en su punto - Gestión de recetas</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/style.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+
+<body>
+    <nav class="menu-lateral">
+        <button id="btn-cerrar-menu" class="btn-cerrar-menu">
+            <i class="fa-solid fa-xmark"></i>
+        </button>
+        <div class="logo-contenedor">
+            <img src="img/logo.jpg" alt="Logo Pan en su punto">
+        </div>
+        <ul>
+            <li><a href="panel.html"><i class="fa-solid fa-house"></i> Inicio</a></li>
+            <li><a href="usuarios.html"><i class="fa-solid fa-users"></i> Usuarios</a></li>
+            <li><a href="inventario-inicio.html"><i class="fa-solid fa-box"></i> Inventario</a></li>
+            <li><a href="recetas-inicio.html" class="activo"><i class="fa-solid fa-book"></i> Recetas</a></li>
+            <li><a href="produccion-inicio.html"><i class="fa-solid fa-fire-burner"></i> Producción</a></li>
+            <li><a href="ventas-inicio.html"><i class="fa-solid fa-cash-register"></i> Ventas</a></li>
+            <li><a href="reportes-inicio.html"><i class="fa-solid fa-chart-line"></i> Reportes</a></li>
+            <li><a href="configuracion.html"><i class="fa-solid fa-gear"></i> Configuración</a></li>
+        </ul>
+    </nav>
+    <main class="contenido-principal">
+        <header class="barra-superior">
+            <div class="buscador">
+                <i class="fa-solid fa-magnifying-glass"></i>
+                <input type="text" placeholder="Buscar...">
+            </div>
+            <div class="iconos-usuario">
+                <i class="fa-regular fa-bell"></i>
+                <div class="avatar-usuario">A</div>
+            </div>
+        </header>
+
+        <div class="encabezado-seccion">
+            <div class="titulos">
+                <h2>Crear nueva receta</h2>
+                <p>Registra la ficha técnica y los ingredientes para calcular el costo de producción.</p>
+            </div>
+        </div>
+
+        <div class="tarjeta-datos">
+            <form class="formulario-estandar">
+                <h3 class="titulo-divisor">Datos generales</h3>
+                <div class="grid-formulario mb-15">
+                    <div class="grupo-form">
+                        <label>Nombre de la receta *</label>
+                        <input type="text" placeholder="Ej: Pan aliñado tradicional" required>
+                    </div>
+                    <div class="grupo-form">
+                        <label>Producto terminado vinculado *</label>
+                        <select required>
+                            <option value="">Seleccione...</option>
+                            <option value="1">Pan aliñado</option>
+                            <option value="2">Croissant</option>
+                        </select>
+                    </div>
+                    <div class="grupo-form">
+                        <label>Rendimiento (unidades) *</label>
+                        <input type="number" placeholder="Ej: 20" required>
+                    </div>
+                    <div class="grupo-form">
+                        <label>Tiempo de preparación (minutos)</label>
+                        <input type="number" placeholder="Ej: 120">
+                    </div>
+                </div>
+
+                <h3 class="titulo-divisor mt-30">Ingredientes</h3>
+
+                <table class="tabla-datos mb-20">
+                    <thead>
+                        <tr>
+                            <th>Materia prima</th>
+                            <th>Cantidad</th>
+                            <th>Unidad</th>
+                            <th>Costo estimado</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tabla-ingredientes">
+                        <tr>
+                            <td>Harina de trigo</td>
+                            <td>1000</td>
+                            <td>g</td>
+                            <td>$ 2.400</td>
+                            <td>
+                                <a href="#" class="btn-icono btn-eliminar-fila">
+                                    <i class="fa-solid fa-trash btn-eliminar"></i>
+                                </a>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <button type="button" id="btn-agregar-ingrediente" class="btn-principal mb-20">
+                    <i class="fa-solid fa-plus margen-icono"></i> Agregar ingrediente
+                </button>
+
+                <h3 class="titulo-divisor mt-30">Instrucciones de preparación</h3>
+
+                <div class="grid-formulario mb-15">
+                    <div class="grupo-form">
+                        <label>Temperatura de horneado (°C)</label>
+                        <input type="number" placeholder="Ej: 180">
+                    </div>
+                    <div class="grupo-form">
+                        <label>Tiempo de horneado (minutos)</label>
+                        <input type="number" placeholder="Ej: 45">
+                    </div>
+                </div>
+
+                <div class="grupo-form ancho-completo mb-20">
+                    <label>Paso a paso *</label>
+                    <textarea rows="6"
+                        placeholder="1. Mezclar los ingredientes secos...&#10;2. Añadir el agua poco a poco...&#10;3. Amasar hasta obtener una textura lisa..."
+                        required></textarea>
+                </div>
+
+                <div class="acciones-formulario borde-superior">
+                    <a href="gestion-recetas.html" class="btn-secundario">Cancelar</a>
+                    <button type="button" id="btn-guardar-receta" class="btn-principal btn-abrir-modal">Guardar receta</button>
+                </div>
+            </form>
+        </div>
+
+        <!-- Modal de éxito -->
+        <div id="modal-exito" class="fondo-modal oculto">
+            <div class="contenido-modal centrado">
+                <div class="icono-exito">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF"
+                        stroke-width="4" stroke-linecap="round" stroke-linejoin="round" class="icono-svg">
+                        <polyline points="20 6 9 17 4 12"></polyline>
+                    </svg>
+                </div>
+                <h3>¡Receta guardada!</h3>
+                <p>La ficha técnica se ha registrado correctamente.</p>
+                <a href="gestion-recetas.html" class="btn-principal boton-ancho">Aceptar</a>
+            </div>
+        </div>
+    </main>
+    <script src="js/main.js"></script>
+</body>
+
+</html>

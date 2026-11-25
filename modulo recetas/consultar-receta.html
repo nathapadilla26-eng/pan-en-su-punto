@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pan en su punto - Gestión de recetas</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/style.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+
+<body>
+    <nav class="menu-lateral">
+        <button id="btn-cerrar-menu" class="btn-cerrar-menu">
+            <i class="fa-solid fa-xmark"></i>
+        </button>
+        <div class="logo-contenedor">
+            <img src="img/logo.jpg" alt="Logo Pan en su punto">
+        </div>
+        <ul>
+            <li><a href="panel.html"><i class="fa-solid fa-house"></i> Inicio</a></li>
+            <li><a href="usuarios.html"><i class="fa-solid fa-users"></i> Usuarios</a></li>
+            <li><a href="inventario-inicio.html"><i class="fa-solid fa-box"></i> Inventario</a></li>
+            <li><a href="recetas-inicio.html" class="activo"><i class="fa-solid fa-book"></i> Recetas</a></li>
+            <li><a href="produccion-inicio.html"><i class="fa-solid fa-fire-burner"></i> Producción</a></li>
+            <li><a href="ventas-inicio.html"><i class="fa-solid fa-cash-register"></i> Ventas</a></li>
+            <li><a href="reportes inicio"><i class="fa-solid fa-chart-line"></i> Reportes</a></li>
+            <li><a href="configuracion.html"><i class="fa-solid fa-gear"></i> Configuración</a></li>
+        </ul>
+    </nav>
+    <main class="contenido-principal">
+        <header class="barra-superior">
+            <div class="buscador">
+                <i class="fa-solid fa-magnifying-glass"></i>
+                <input type="text" placeholder="Buscar...">
+            </div>
+            <div class="iconos-usuario">
+                <i class="fa-regular fa-bell"></i>
+                <div class="avatar-usuario">A</div>
+            </div>
+        </header>
+        <main class="contenido-principal">
+        <div class="encabezado-seccion">
+            <div>
+                <h2>Ficha técnica de receta</h2>
+                <p>Consulta estandarizada de ingredientes, proporciones e instrucciones para el horneado.</p>
+            </div>
+            <div class="acciones-encabezado">
+                <a href="recetas-inicio.html" class="btn-principal"><i class="fa-solid fa-arrow-left"></i> Volver</a>
+            </div>
+        </div>
+
+        <!-- Selector de Receta para cambiar de fórmula rápidamente -->
+        <div class="tarjeta-datos barra-filtro-receta">
+            <div class="grupo-input">
+                <label for="selector-receta-consulta">Seleccionar receta para consultar:</label>
+                <select id="selector-receta-consulta">
+                    <option value="R-001" selected>R-001 - Masa madre tradicional (Pan aliñado)</option>
+                    <option value="R-014">R-014 - Croissant francés (Croissant de mantequilla)</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="tarjeta-datos ficha-lectura">
+            <!-- Resumen de Ficha -->
+            <div class="cabecera-ficha">
+                <div class="info-principal-receta">
+                    <span class="etiqueta-codigo">R-001</span>
+                    <h3>Masa madre tradicional</h3>
+                    <p class="subtitulo-producto">Producto vinculado: <strong>Pan aliñado tradicional</strong></p>
+                </div>
+                <div class="estado-ficha">
+                    <span class="estado-activo">Receta activa</span>
+                </div>
+            </div>
+
+            <!-- Parámetros clave de producción -->
+            <div class="metricas-ficha-grid">
+                <div class="metrica-item">
+                    <span class="metrica-etiqueta">Rendimiento</span>
+                    <span class="metrica-valor">20 unidades</span>
+                </div>
+                <div class="metrica-item">
+                    <span class="metrica-etiqueta">Tiempo de preparación</span>
+                    <span class="metrica-valor">120 minutos</span>
+                </div>
+                <div class="metrica-item">
+                    <span class="metrica-etiqueta">Temperatura de horneado</span>
+                    <span class="metrica-valor">180 °C</span>
+                </div>
+                <div class="metrica-item">
+                    <span class="metrica-etiqueta">Tiempo de horneado</span>
+                    <span class="metrica-valor">25 minutos</span>
+                </div>
+            </div>
+
+            <!-- Lista de ingredientes fija -->
+            <h4 class="subtitulo-seccion-ficha">Ingredientes y dosificación</h4>
+            <table class="tabla-datos tabla-solo-lectura">
+                <thead>
+                    <tr>
+                        <th>Materia prima</th>
+                        <th>Cantidad requerida</th>
+                        <th>Unidad de medida</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Harina de trigo</td>
+                        <td>1.000</td>
+                        <td>Gramos (g)</td>
+                    </tr>
+                    <tr>
+                        <td>Mantequilla</td>
+                        <td>250</td>
+                        <td>Gramos (g)</td>
+                    </tr>
+                    <tr>
+                        <td>Levadura seca</td>
+                        <td>30</td>
+                        <td>Gramos (g)</td>
+                    </tr>
+                    <tr>
+                        <td>Agua tibia</td>
+                        <td>600</td>
+                        <td>Mililitros (ml)</td>
+                    </tr>
+                    <tr>
+                        <td>Sal marina fina</td>
+                        <td>20</td>
+                        <td>Gramos (g)</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <!-- Procedimiento de preparación -->
+            <h4 class="subtitulo-seccion-ficha">Paso a paso e instrucciones de preparación</h4>
+            <div class="caja-instrucciones-lectura">
+                <ol>
+                    <li>Mezclar la harina y la levadura en el tazón de amasado, agregando gradualmente el agua tibia durante 10 minutos a velocidad baja.</li>
+                    <li>Incorporar la mantequilla en punto pomada y la sal. Amasar durante 8 minutos adicionales a velocidad media hasta lograr la prueba de velo o elasticidad completa.</li>
+                    <li>Bolear y dejar fermentar en bloque durante 90 minutos a temperatura ambiente (24 °C - 26 °C) en un recipiente cubierto con paño húmedo.</li>
+                    <li>Dividir en piezas de masa de 90 gramos, dar forma tradicional de pan aliñado y estibar en bandejas previamente engrasadas.</li>
+                    <li>Llevar a cámara de crecimiento por 45 minutos y hornear a 180 °C durante 25 minutos con vapor inicial de 3 segundos.</li>
+                </ol>
+            </div>
+        </div>
+    </main>
+    <script src="js/main.js"></script>
+</body>
+
+</html>
