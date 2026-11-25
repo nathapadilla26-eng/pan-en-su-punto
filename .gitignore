@@ -1,0 +1,6 @@
+config/conexion.php
+.env
+vendor/
+.vscode/
+Thumbs.db
+.DS_Store
