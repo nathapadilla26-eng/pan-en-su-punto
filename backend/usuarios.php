@@ -180,7 +180,7 @@ if ($metodo === 'POST') {
         exit();
     }
 
-    // Acción C: Generar contraseña temporal (RF 05)
+    // Acción C: Generar contraseña temporal y marcar cambio obligatorio (RF 05)
     if ($accion === 'generar_temporal') {
         $idUsuario = isset($datos['id_usuario']) ? intval($datos['id_usuario']) : 0;
 
@@ -190,7 +190,9 @@ if ($metodo === 'POST') {
                 $claveTemporal = "Pp#" . $numeroAleatorio . "Temp!";
                 $claveEncriptada = password_hash($claveTemporal, PASSWORD_DEFAULT);
 
-                $sql = "UPDATE usuarios SET contrasena = :contrasena WHERE id_usuario = :id_usuario";
+                $sql = "UPDATE usuarios
+                        SET contrasena = :contrasena, debe_cambiar_contrasena = 1
+                        WHERE id_usuario = :id_usuario";
                 $consulta = $conexion->prepare($sql);
                 $consulta->bindParam(':contrasena', $claveEncriptada);
                 $consulta->bindParam(':id_usuario', $idUsuario, PDO::PARAM_INT);
@@ -212,7 +214,7 @@ if ($metodo === 'POST') {
         }
     }
 
-    // Acción D: Actualizar contraseña propia o temporal (RF 05 y RF 12)
+    // Acción D: Actualizar contraseña propia o temporal y liberar el bloqueo (RF 05 y RF 12)
     if ($accion === 'cambiar_contrasena') {
         $idUsuario = isset($datos['id_usuario']) ? intval($datos['id_usuario']) : 0;
         $contrasenaActual = isset($datos['contrasena_actual']) ? $datos['contrasena_actual'] : '';
@@ -227,7 +229,6 @@ if ($metodo === 'POST') {
         }
 
         try {
-            // Verifica que la contraseña actual o temporal coincida con la guardada en MySQL
             $sqlBuscar = "SELECT contrasena FROM usuarios WHERE id_usuario = :id_usuario LIMIT 1";
             $stmtBuscar = $conexion->prepare($sqlBuscar);
             $stmtBuscar->bindParam(':id_usuario', $idUsuario, PDO::PARAM_INT);
@@ -242,9 +243,10 @@ if ($metodo === 'POST') {
                 exit();
             }
 
-            // Encripta y guarda la nueva contraseña
             $nuevaHash = password_hash($contrasenaNueva, PASSWORD_DEFAULT);
-            $sqlActualizar = "UPDATE usuarios SET contrasena = :contrasena WHERE id_usuario = :id_usuario";
+            $sqlActualizar = "UPDATE usuarios
+                              SET contrasena = :contrasena, debe_cambiar_contrasena = 0
+                              WHERE id_usuario = :id_usuario";
             $stmtActualizar = $conexion->prepare($sqlActualizar);
             $stmtActualizar->bindParam(':contrasena', $nuevaHash);
             $stmtActualizar->bindParam(':id_usuario', $idUsuario, PDO::PARAM_INT);

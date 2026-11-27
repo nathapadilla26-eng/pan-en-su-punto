@@ -1,7 +1,7 @@
 <?php
 /**
- * Servicio de autenticación (RF 01, RF 02 y RF 03).
- * Valida credenciales, estado activo y bloqueo temporal de 15 minutos tras 5 intentos fallidos.
+ * Servicio de autenticación (RF 01, RF 02, RF 03 y RF 05).
+ * Valida credenciales, bloqueo por intentos fallidos e indicador de cambio obligatorio de clave.
  */
 require_once 'conexion.php';
 
@@ -22,7 +22,7 @@ if ($usuarioInput === '' || $contrasenaInput === '') {
 
 try {
     $sql = "SELECT u.id_usuario, u.documento, u.nombre_completo, u.correo, u.contrasena, u.estado,
-                   u.intentos_fallidos, u.bloqueado_hasta, r.nombre_rol
+                   u.intentos_fallidos, u.bloqueado_hasta, u.debe_cambiar_contrasena, r.nombre_rol
             FROM usuarios u
             INNER JOIN roles r ON u.id_rol = r.id_rol
             WHERE u.correo = :usuario OR u.documento = :usuario
@@ -38,13 +38,11 @@ try {
         exit();
     }
 
-    // 1. Verifica si la cuenta está inactiva
     if (intval($usuario['estado']) !== 1) {
         echo json_encode(["exito" => false, "mensaje" => "Esta cuenta se encuentra inactiva. Contacte al administrador."]);
         exit();
     }
 
-    // 2. Verifica si tiene un bloqueo temporal vigente (RF 03)
     if (!empty($usuario['bloqueado_hasta'])) {
         $ahora = new DateTime();
         $finBloqueo = new DateTime($usuario['bloqueado_hasta']);
@@ -59,7 +57,6 @@ try {
             ]);
             exit();
         } else {
-            // El tiempo de bloqueo ya expiró; se reinicia el contador
             $sqlDesbloquear = "UPDATE usuarios SET intentos_fallidos = 0, bloqueado_hasta = NULL WHERE id_usuario = :id";
             $stmtDesb = $conexion->prepare($sqlDesbloquear);
             $stmtDesb->bindParam(':id', $usuario['id_usuario'], PDO::PARAM_INT);
@@ -68,7 +65,6 @@ try {
         }
     }
 
-    // 3. Verifica la contraseña
     $claveValida = password_verify($contrasenaInput, $usuario['contrasena']) || ($contrasenaInput === $usuario['contrasena']);
 
     if (!$claveValida) {
@@ -103,12 +99,12 @@ try {
         exit();
     }
 
-    // 4. Inicio de sesión exitoso: reinicia intentos fallidos y devuelve sesión
     $sqlReiniciar = "UPDATE usuarios SET intentos_fallidos = 0, bloqueado_hasta = NULL WHERE id_usuario = :id";
     $stmtReiniciar = $conexion->prepare($sqlReiniciar);
     $stmtReiniciar->bindParam(':id', $usuario['id_usuario'], PDO::PARAM_INT);
     $stmtReiniciar->execute();
 
+    $usuario['debe_cambiar_contrasena'] = intval($usuario['debe_cambiar_contrasena']);
     unset($usuario['contrasena'], $usuario['intentos_fallidos'], $usuario['bloqueado_hasta']);
 
     echo json_encode([

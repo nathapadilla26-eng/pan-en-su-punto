@@ -118,8 +118,8 @@ function ListaUsuarios({ onNuevoUsuario, onEditarUsuario }) {
 
   return (
     <>
-      <div className="cabecera-modulo">
-        <div className="textos-modulo">
+      <div className="encabezado-seccion">
+        <div className="titulos">
           <h2>Gestión de Usuarios</h2>
           <p>Gestiona el personal de la panadería, roles y permisos de acceso.</p>
         </div>
